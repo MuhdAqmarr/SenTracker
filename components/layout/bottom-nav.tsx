@@ -18,7 +18,7 @@ export function BottomNav() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 pb-safe">
-      <div className="flex justify-around items-center h-16">
+      <div className="flex justify-around items-center h-16 md:h-20">
         {navigation.map((item) => {
           const isActive = pathname === item.href
           
@@ -37,14 +37,14 @@ export function BottomNav() {
               )}
               
               <div className={cn(
-                "transition-colors duration-200",
+                "transition-colors duration-200 min-h-[48px] min-w-[48px] flex items-center justify-center",
                 isActive ? "text-emerald-500" : "text-slate-400"
               )}>
-                <item.icon className="h-6 w-6" strokeWidth={isActive ? 2.5 : 2} />
+                <item.icon className="h-6 w-6 md:h-7 md:w-7" strokeWidth={isActive ? 2.5 : 2} />
               </div>
               
               <span className={cn(
-                "text-[10px] mt-1 font-medium transition-colors duration-200",
+                "text-[10px] md:text-xs mt-1 font-medium transition-colors duration-200",
                 isActive ? "text-emerald-500" : "text-slate-400"
               )}>
                 {item.name}

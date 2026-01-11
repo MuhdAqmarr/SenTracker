@@ -56,43 +56,51 @@ export default async function HistoryPage({
     <div className="space-y-6">
       <AddExpenseSheet categories={data.categories} />
       
-      <FadeInStagger className="space-y-6">
-        {Object.entries(groupedExpenses).map(([date, items]) => (
-          <FadeInItem key={date} className="space-y-2">
-            <h3 className="text-sm font-medium text-slate-500 px-1">{date}</h3>
-            <div className="space-y-2">
-              {items.map((expense) => (
-                <Card key={expense.id} className="border-none shadow-sm bg-white dark:bg-slate-900 overflow-hidden">
-                  <CardContent className="p-4 flex items-center justify-between">
-                    <div className="space-y-0.5">
-                      <p className="font-medium text-slate-900 dark:text-white">{expense.merchant}</p>
-                      <p className="text-xs text-slate-500">{expense.categories?.name || 'Uncategorized'}</p>
-                      {expense.notes && (
-                        <p className="text-xs text-slate-400 italic">{expense.notes}</p>
-                      )}
-                    </div>
-                    <div className="text-right">
-                      <p className="font-semibold text-slate-900 dark:text-white">
-                        {formatCurrency(expense.amount)}
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </FadeInItem>
-        ))}
-        
-        {data.expenses.length === 0 && (
-          <FadeInItem>
-            <Card className="border-none shadow-sm bg-white dark:bg-slate-900">
-              <CardContent className="p-8 text-center text-muted-foreground">
-                No expenses found for this month.
-              </CardContent>
-            </Card>
-          </FadeInItem>
-        )}
-      </FadeInStagger>
+      {/* Desktop Table View */}
+      <div className="hidden lg:block">
+        <ExpenseTable data={data.expenses} categories={data.categories} />
+      </div>
+      
+      {/* Mobile/Tablet Card List View */}
+      <div className="lg:hidden">
+        <FadeInStagger className="space-y-6">
+          {Object.entries(groupedExpenses).map(([date, items]) => (
+            <FadeInItem key={date} className="space-y-2">
+              <h3 className="text-sm font-medium text-slate-500 px-1">{date}</h3>
+              <div className="space-y-2">
+                {items.map((expense) => (
+                  <Card key={expense.id} className="border-none shadow-sm bg-white dark:bg-slate-900 overflow-hidden">
+                    <CardContent className="p-4 flex items-center justify-between">
+                      <div className="space-y-0.5">
+                        <p className="font-medium text-slate-900 dark:text-white">{expense.merchant}</p>
+                        <p className="text-xs text-slate-500">{expense.categories?.name || 'Uncategorized'}</p>
+                        {expense.notes && (
+                          <p className="text-xs text-slate-400 italic">{expense.notes}</p>
+                        )}
+                      </div>
+                      <div className="text-right">
+                        <p className="font-semibold text-slate-900 dark:text-white">
+                          {formatCurrency(expense.amount)}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </FadeInItem>
+          ))}
+          
+          {data.expenses.length === 0 && (
+            <FadeInItem>
+              <Card className="border-none shadow-sm bg-white dark:bg-slate-900">
+                <CardContent className="p-8 text-center text-muted-foreground">
+                  No expenses found for this month.
+                </CardContent>
+              </Card>
+            </FadeInItem>
+          )}
+        </FadeInStagger>
+      </div>
     </div>
   )
 }

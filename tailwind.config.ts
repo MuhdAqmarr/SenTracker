@@ -9,6 +9,11 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+  		screens: {
+  			'3xl': '1920px',  // Full HD
+  			'4xl': '2560px',  // 2K/QHD
+  			'5xl': '3840px',  // 4K/UHD
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

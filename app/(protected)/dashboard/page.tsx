@@ -104,7 +104,7 @@ export default async function DashboardPage({
   const overBudgetCount = budgetProgress.filter(b => b.spent > b.limit).length
 
   return (
-    <div className="space-y-6 pb-20">
+    <div className="space-y-4 md:space-y-6 lg:space-y-8 pb-20 lg:pb-0">
       <AddExpenseSheet categories={categories} />
 
       <FadeInStagger>
@@ -116,13 +116,16 @@ export default async function DashboardPage({
           />
         </FadeInItem>
 
-        <FadeInItem>
-          <CategoryChart data={categoryData} />
-        </FadeInItem>
+        {/* Chart and Budget Progress - Side by side on desktop */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
+          <FadeInItem>
+            <CategoryChart data={categoryData} />
+          </FadeInItem>
 
-        <FadeInItem>
-          <BudgetProgressCard data={budgetProgress} />
-        </FadeInItem>
+          <FadeInItem>
+            <BudgetProgressCard data={budgetProgress} />
+          </FadeInItem>
+        </div>
 
         <FadeInItem>
           <TopMerchants data={topMerchants} />

@@ -13,10 +13,10 @@ export function StatsCards({ totalSpend, budgetTotal, overBudgetCount }: StatsCa
   const spendPercentage = budgetTotal > 0 ? (totalSpend / budgetTotal) * 100 : 0
   
   return (
-    <div className="grid gap-3 md:grid-cols-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-6">
       <TapMotion>
         <Card className="border-none shadow-sm bg-white dark:bg-slate-900 overflow-hidden">
-          <CardContent className="p-4 flex flex-col justify-between h-full">
+          <CardContent className="p-4 md:p-5 lg:p-6 flex flex-col justify-between h-full relative">
             <div className="flex justify-between items-start mb-2">
               <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">Total Spend</span>
               <div className="p-1.5 bg-emerald-100 dark:bg-emerald-900/30 rounded-full">
@@ -24,7 +24,7 @@ export function StatsCards({ totalSpend, budgetTotal, overBudgetCount }: StatsCa
               </div>
             </div>
             <div>
-              <div className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+              <div className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
                 {formatCurrency(totalSpend)}
               </div>
               <p className="text-[10px] text-slate-400 mt-1">For selected month</p>
@@ -35,7 +35,7 @@ export function StatsCards({ totalSpend, budgetTotal, overBudgetCount }: StatsCa
 
       <TapMotion>
         <Card className="border-none shadow-sm bg-white dark:bg-slate-900 overflow-hidden">
-          <CardContent className="p-4 flex flex-col justify-between h-full">
+          <CardContent className="p-4 md:p-5 lg:p-6 flex flex-col justify-between h-full relative">
             <div className="flex justify-between items-start mb-2">
               <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">Budget Usage</span>
               <div className="p-1.5 bg-blue-100 dark:bg-blue-900/30 rounded-full">
@@ -43,7 +43,7 @@ export function StatsCards({ totalSpend, budgetTotal, overBudgetCount }: StatsCa
               </div>
             </div>
             <div>
-              <div className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+              <div className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
                 {spendPercentage.toFixed(0)}%
               </div>
               <p className="text-[10px] text-slate-400 mt-1">
@@ -63,7 +63,7 @@ export function StatsCards({ totalSpend, budgetTotal, overBudgetCount }: StatsCa
 
       <TapMotion>
         <Card className="border-none shadow-sm bg-white dark:bg-slate-900 overflow-hidden">
-          <CardContent className="p-4 flex flex-col justify-between h-full">
+          <CardContent className="p-4 md:p-5 lg:p-6 flex flex-col justify-between h-full relative">
             <div className="flex justify-between items-start mb-2">
               <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">Health</span>
               <div className={`p-1.5 rounded-full ${overBudgetCount > 0 ? 'bg-red-100 dark:bg-red-900/30' : 'bg-emerald-100 dark:bg-emerald-900/30'}`}>
@@ -71,7 +71,7 @@ export function StatsCards({ totalSpend, budgetTotal, overBudgetCount }: StatsCa
               </div>
             </div>
             <div>
-              <div className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+              <div className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
                 {overBudgetCount > 0 ? `${overBudgetCount} Alert` : 'Healthy'}
               </div>
               <p className="text-[10px] text-slate-400 mt-1">

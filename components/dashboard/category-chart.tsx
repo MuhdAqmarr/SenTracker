@@ -3,7 +3,6 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { formatCurrency } from '@/lib/utils'
-import { motion } from 'framer-motion'
 
 const COLORS = [
   '#10b981', // emerald-500

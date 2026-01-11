@@ -12,16 +12,12 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from '@/components/ui/sheet'
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
-  DrawerFooter,
-  DrawerClose,
 } from '@/components/ui/drawer'
 import {
   Form,
@@ -47,17 +43,27 @@ import { addExpense } from '@/lib/actions/expenses'
 import { useToast } from '@/hooks/use-toast'
 import { FAB } from '@/components/ui/fab'
 import { useMediaQuery } from '@/hooks/use-media-query'
+import { Plus } from 'lucide-react'
 
 interface Category {
   id: string
   name: string
 }
 
-export function AddExpenseSheet({ categories }: { categories: Category[] }) {
+interface AddExpenseSheetProps {
+  categories: Category[]
+  variant?: 'fab' | 'button'
+}
+
+export function AddExpenseSheet({ categories, variant }: AddExpenseSheetProps) {
   const [open, setOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
   const isDesktop = useMediaQuery("(min-width: 768px)")
+  const isLargeScreen = useMediaQuery("(min-width: 1024px)")
+  
+  // Auto-detect variant: button on desktop (lg+), fab on mobile/tablet
+  const effectiveVariant = variant || (isLargeScreen ? 'button' : 'fab')
 
   const form = useForm<ExpenseFormValues>({
     resolver: zodResolver(expenseSchema),
@@ -230,10 +236,22 @@ export function AddExpenseSheet({ categories }: { categories: Category[] }) {
     </Form>
   )
 
+  const TriggerButton = effectiveVariant === 'button' ? (
+    <Button 
+      onClick={() => setOpen(true)}
+      className="bg-emerald-600 hover:bg-emerald-700 text-white"
+    >
+      <Plus className="h-4 w-4 mr-2" />
+      Add Expense
+    </Button>
+  ) : (
+    <FAB onClick={() => setOpen(true)} />
+  )
+
   if (isDesktop) {
     return (
       <>
-        <FAB onClick={() => setOpen(true)} />
+        {TriggerButton}
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetContent side="right" className="sm:max-w-[425px]">
             <SheetHeader className="mb-6">
@@ -248,7 +266,7 @@ export function AddExpenseSheet({ categories }: { categories: Category[] }) {
 
   return (
     <>
-      <FAB onClick={() => setOpen(true)} />
+      {TriggerButton}
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerContent>
           <DrawerHeader className="text-left">

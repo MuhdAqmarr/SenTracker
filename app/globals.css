@@ -74,6 +74,23 @@
     @apply bg-slate-50 dark:bg-slate-950 text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+  
+  /* Fluid typography for 2K/4K displays */
+  html {
+    font-size: 16px;
+  }
+  
+  @media (min-width: 2560px) {
+    html {
+      font-size: calc(16px + 0.25vw);
+    }
+  }
+  
+  @media (min-width: 3840px) {
+    html {
+      font-size: calc(18px + 0.3vw);
+    }
+  }
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { signOut } from '@/app/(auth)/actions'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { LogOut, Settings, CreditCard, HelpCircle, Shield } from 'lucide-react'
 import { TapMotion } from '@/components/motion'
