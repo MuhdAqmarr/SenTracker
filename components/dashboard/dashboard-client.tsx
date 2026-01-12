@@ -22,9 +22,21 @@ interface DashboardClientProps {
   categories: Category[]
 }
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
+
 export function DashboardClient({ expenses, categories }: DashboardClientProps) {
   const [editingExpense, setEditingExpense] = useState<ExpenseWithCategory | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [deleteId, setDeleteId] = useState<string | null>(null)
   const { toast } = useToast()
 
   const handleEdit = (expense: ExpenseWithCategory) => {
@@ -33,8 +45,7 @@ export function DashboardClient({ expenses, categories }: DashboardClientProps) 
   }
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this expense?')) return
-
+    setDeleteId(null) // Close dialog immediately
     const result = await deleteExpense(id)
     if (result.error) {
       toast({
@@ -55,7 +66,7 @@ export function DashboardClient({ expenses, categories }: DashboardClientProps) 
       <ExpenseList 
         expenses={expenses}
         onEdit={handleEdit}
-        onDelete={handleDelete}
+        onDelete={(id) => setDeleteId(id)}
       />
       
       <EditExpenseDialog 
@@ -64,6 +75,26 @@ export function DashboardClient({ expenses, categories }: DashboardClientProps) 
         open={isDialogOpen}
         onOpenChange={setIsDialogOpen}
       />
+
+      <AlertDialog open={!!deleteId} onOpenChange={(open) => !open && setDeleteId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete the expense record.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={() => deleteId && handleDelete(deleteId)}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   )
 }
