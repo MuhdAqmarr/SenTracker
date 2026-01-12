@@ -1,8 +1,22 @@
-import { redirect } from 'next/navigation'
+import { LandingBackground } from "@/components/landing/background"
+import { LandingHero } from "@/components/landing/hero"
+import { LandingFeatures } from "@/components/landing/features"
+import { LandingCoach } from "@/components/landing/coach-teaser"
+import { LandingTrust } from "@/components/landing/trust"
+import { LandingFooter } from "@/components/landing/footer"
 
 export default function Home() {
-  // #region agent log
-  fetch('http://127.0.0.1:7242/ingest/41ffdff1-fbce-4bc2-bd3b-bb934cde6189',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'app/page.tsx:4',message:'Root page reached',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'C,E'})}).catch(()=>{});
-  // #endregion
-  redirect('/dashboard')
+  return (
+    <main className="min-h-screen bg-[#0a0a0f] text-white selection:bg-emerald-500/30 selection:text-emerald-200">
+      <LandingBackground />
+      
+      <div className="relative z-10 w-full overflow-hidden">
+        <LandingHero />
+        <LandingFeatures />
+        <LandingCoach />
+        <LandingTrust />
+        <LandingFooter />
+      </div>
+    </main>
+  )
 }

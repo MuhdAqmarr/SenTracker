@@ -42,7 +42,7 @@ export function AccountSection({ email, displayName }: AccountSectionProps) {
         <Button 
           variant="outline" 
           onClick={handleSignOut}
-          className="w-full"
+          className="w-full text-red-500 hover:text-red-600 hover:bg-red-500/10 border-red-500/20"
         >
           Sign Out
         </Button>

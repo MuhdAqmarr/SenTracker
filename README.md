@@ -1,99 +1,90 @@
-# SenTracker - MYR Expense Tracker & Budget Coach
+# SenTracker - Premium MYR Finance Companion 💎
 
-A modern expense tracking application built for Malaysian Ringgit (MYR) users. Track expenses, set budgets, and get insights into your spending habits.
+A high-end, consumer-grade expense tracker tailored for Malaysians. Built with a focus on "Liquid Finance" aesthetics, privacy-first architecture, and seamless PWA performance.
 
-![Next.js](https://img.shields.io/badge/Next.js-14-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8)
-![Supabase](https://img.shields.io/badge/Supabase-Auth%20%2B%20DB-3ecf8e)
+![SenTracker Hero Details](/app/icon.png)
 
-## Features
+## ✨ Premium Features
 
-- **OAuth Authentication** - Sign in with Google or GitHub
-- **Expense Tracking** - Add, edit, and delete expenses with categorization
-- **Budget Management** - Set monthly budgets for each category
-- **Analytics Dashboard** - View spending breakdown, top merchants, and budget health
-- **CSV Export** - Export monthly expense data to CSV
-- **Mobile Responsive** - Works great on all devices
+### 🎨 Awwwards-Level UX
 
-## Tech Stack
+- **Liquid Gradient Engine**: A custom GPU-accelerated background that creates a calm, floating aurora effect.
+- **Glassmorphism 2.0**: Multi-layered blur effects with dynamic lighting and noise textures.
+- **Cinematic Motion**: Powered by **GSAP** and **Framer Motion** for silky smooth page transitions and scroll triggers.
+- **Interactive 3D Elements**: CSS-based 3D transformations for cards and phone mockups (0kb asset weight!).
 
-- **Framework**: Next.js 14 (App Router)
+### 📱 Progressive Web App (PWA)
+
+- **Installable**: Adds to home screen on iOS and Android.
+- **Offline Capable**: Check your budget even without data.
+- **Haptic Feedback**: Subtle vibrations for tactile interactions (mobile only).
+- **Adaptive Theming**: intelligently switches between a crisp "Daylight" mode and a deep "Midnight" OLED mode.
+
+### 💰 Finance Features (MYR Optimized)
+
+- **Smart Dashboard**: "Money Vibe" indicator that tells you if you're safe to spend.
+- **Budget Coach**: A rule-based financial mentor that gives actionable advice based on your spending patterns.
+- **Monthly Insights**: Visual breakdown of where your Ringgit is going.
+- **Quick-Add**: Optimized mobile flow to add expenses in under 3 seconds.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS + shadcn/ui
-- **Backend**: Supabase (PostgreSQL + Auth)
-- **Charts**: Recharts
-- **Forms**: React Hook Form + Zod
+- **Database**: [Supabase](https://supabase.com/) (PostgreSQL + Auth)
+- **Styling**: Tailwind CSS + Custom Design System
+- **Animation**: GSAP + Framer Motion
 - **Icons**: Lucide React
+- **Hosting**: Vercel (Recommended)
 
-## Getting Started
+---
 
-### 1. Clone and Install
+## 🚀 Getting Started
+
+### 1. Clone & Install
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/MuhdAqmarr/SenTracker.git
 cd sentracker
 npm install
 ```
 
-### 2. Set Up Supabase
+### 2. Environment Setup
 
-1. Create a new project at [supabase.com](https://supabase.com)
-2. Go to **SQL Editor** and run the migration file at `supabase/migrations/001_initial_schema.sql`
-3. Configure OAuth providers:
-   - Go to **Authentication** > **Providers**
-   - Enable **Google** and **GitHub**
-   - Add your OAuth credentials
-4. Set the redirect URL to: `http://localhost:3000/auth/callback`
-
-### 3. Configure Environment
-
-Create a `.env.local` file in the root directory:
+Create a `.env.local` file in the root:
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-### 4. Run the Development Server
+### 3. Run Locally
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000). The landing page demonstrates the full premium experience.
 
-## Project Structure
+---
 
-```
-├── app/
-│   ├── (auth)/           # Auth routes (login)
-│   ├── (protected)/      # Protected routes (dashboard, budget)
-│   └── auth/callback/    # OAuth callback handler
-├── components/
-│   ├── auth/             # Auth components
-│   ├── budget/           # Budget form components
-│   ├── dashboard/        # Dashboard analytics components
-│   ├── expenses/         # Expense CRUD components
-│   ├── layout/           # Layout components (sidebar, header)
-│   └── ui/               # shadcn/ui components
-├── lib/
-│   ├── actions/          # Server actions
-│   ├── supabase/         # Supabase clients
-│   ├── utils.ts          # Utility functions
-│   └── validations.ts    # Zod schemas
-├── types/
-│   └── database.ts       # TypeScript types for Supabase
-└── supabase/
-    └── migrations/       # SQL migrations
-```
+## 🌐 Deployment (Vercel)
 
-## Malaysian Context
+1. **Import** the repository to Vercel.
+2. **Add Environment Variables** (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`).
+3. **Deploy**!
+4. **Important**: Go to Supabase > Authentication > URL Configuration and set your Site URL to your new Vercel domain (e.g., `https://sentracker.vercel.app`).
 
-- All currency displayed in **RM** (Malaysian Ringgit)
-- Date format: **DD/MM/YYYY**
-- Pre-configured expense categories relevant to Malaysian lifestyle
+---
 
-## License
+## 🇲🇾 Malaysian Context
 
-MIT
+- **Currency**: All figures formatted in **RM**.
+- **Date**: DD/MM/YYYY format.
+- **Lifestyle Categories**: Includes tailored categories like 'Mamak', 'Grab', etc.
+
+## 📄 License
+
+MIT License.
