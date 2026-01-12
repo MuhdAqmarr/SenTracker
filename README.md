@@ -21,13 +21,6 @@ Skip the boring forms. Just type naturally, and our deterministic parser extract
 
 _Powered by a custom deterministic parsing engine with Malaysian context awareness._
 
-### 🎨 Awwwards-Level UX
-
-- **Liquid Gradient Engine**: Custom GPU-accelerated backgrounds creating a floating aurora effect.
-- **Glassmorphism 2.0**: Multi-layered blur, dynamic lighting, and noise textures.
-- **Cinematic Motion**: **GSAP** & **Framer Motion** for silky smooth transitions.
-- **Responsive Design**: Mobile-first architecture with native-like PWA gestures.
-
 ### 💰 Smart Finance
 
 - **Money Vibe**: Instant visual indicator of your spending health.
