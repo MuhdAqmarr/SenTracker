@@ -67,7 +67,7 @@ export function LandingHero() {
 
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex flex-col items-center pt-32 pb-0 px-4 overflow-hidden perspective-1000">
+    <section ref={containerRef} className="relative min-h-screen flex flex-col items-center pt-24 lg:pt-32 pb-0 px-4 overflow-hidden perspective-1000">
       
       {/* Content Container */}
       <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center z-10">
@@ -81,26 +81,26 @@ export function LandingHero() {
           </div>
 
           <div className="relative">
-            <h1 className="hero-title text-7xl sm:text-8xl lg:text-9xl font-bold tracking-tighter text-white leading-[0.9] invisible">
-              <span className="block opacity-50 relative z-0">LIQUID</span>
+            <h1 className="hero-title text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tighter text-white leading-[0.9] invisible">
+              <span className="block opacity-50 relative z-0">JUST TYPE.</span>
               <span className="block text-emerald-400 relative z-10 -mt-2 sm:-mt-4">
-                FINANCE
+                WE TRACK.
               </span>
             </h1>
             {/* Decorative background blur for text */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-emerald-500/10 blur-[100px] -z-10 rounded-full" />
           </div>
           
-          <p className="hero-subtitle text-xl text-zinc-400 max-w-lg mx-auto lg:mx-0 leading-relaxed font-light invisible">
-            Stop tracking expenses like it&apos;s 2010. Experience the <span className="text-white font-medium">first cinematic personal finance app</span> built for the Malaysian ecosystem.
+          <p className="hero-subtitle text-lg lg:text-xl text-zinc-400 max-w-lg mx-auto lg:mx-0 leading-relaxed font-light invisible">
+            Forget boring forms. Just say <span className="text-white font-medium">"RM12 Grab to KLCC"</span> and let our engine handle the rest. The first finance app that speaks Malaysian.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start pt-4">
             <Link 
               href="/login" 
-              className="hero-btn group relative h-14 pl-8 pr-2 bg-white text-black rounded-full font-bold text-lg flex items-center gap-4 hover:bg-zinc-100 transition-all overflow-hidden"
+              className="hero-btn group relative h-12 lg:h-14 pl-6 lg:pl-8 pr-2 bg-white text-black rounded-full font-bold text-base lg:text-lg flex items-center gap-4 hover:bg-zinc-100 transition-all overflow-hidden"
             >
-              <span className="relative z-10">Start the Experience</span>
+              <span className="relative z-10">Try Natural Entry</span>
               <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center group-hover:scale-110 transition-transform">
                 <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
               </div>
@@ -125,7 +125,7 @@ export function LandingHero() {
         <div className="relative flex justify-center lg:justify-end mt-12 lg:mt-0 perspective-1000">
           <div 
             ref={phoneRef}
-            className="relative w-[300px] h-[600px] bg-black rounded-[45px] border-[8px] border-zinc-800 shadow-2xl overflow-hidden ring-1 ring-white/10 transform transition-transform will-change-transform"
+            className="relative w-[280px] h-[560px] lg:w-[320px] lg:h-[640px] bg-black rounded-[40px] border-[8px] border-zinc-800 shadow-2xl overflow-hidden ring-1 ring-white/10 transform transition-transform will-change-transform origin-center scale-90 lg:scale-95"
             style={{ boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 100px -20px rgba(6, 182, 212, 0.2)" }}
           >
             {/* Notch */}

@@ -7,7 +7,7 @@ export function LandingTrust() {
   return (
     <section id="privacy" className="py-24 px-4 text-center">
       <div className="max-w-4xl mx-auto space-y-12">
-        <h2 className="text-2xl md:text-3xl font-bold text-white">Private by Design.</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-white">Your Data. Your Rules.</h2>
         
         <div className="grid md:grid-cols-3 gap-8">
           <div className="space-y-4">
@@ -29,7 +29,7 @@ export function LandingTrust() {
               <Heart className="w-5 h-5" />
             </div>
             <h3 className="font-semibold text-white">MYR First</h3>
-            <p className="text-sm text-zinc-500">Built for Malaysians. We know what &apos;Mamak&apos; costs and how RM formatting works.</p>
+            <p className="text-sm text-zinc-500">Built for Malaysians. We know the difference between 'Mamak' costs and fine dining.</p>
           </div>
         </div>
 

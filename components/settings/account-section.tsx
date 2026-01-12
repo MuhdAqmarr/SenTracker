@@ -2,8 +2,7 @@
 
 import { User, Mail } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { createClient } from '@/lib/supabase/client'
-import { useRouter } from 'next/navigation'
+import { signOut } from '@/app/(auth)/actions'
 
 interface AccountSectionProps {
   email: string
@@ -11,12 +10,12 @@ interface AccountSectionProps {
 }
 
 export function AccountSection({ email, displayName }: AccountSectionProps) {
-  const router = useRouter()
-  
+  /* 
+    Updated to use Server Action for robust sign-out.
+    This ensures server-side cookies are cleared and handles redirect server-side.
+  */
   const handleSignOut = async () => {
-    const supabase = createClient()
-    await supabase.auth.signOut()
-    router.push('/login')
+    await signOut()
   }
 
   return (

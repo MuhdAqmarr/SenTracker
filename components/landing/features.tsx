@@ -10,27 +10,27 @@ gsap.registerPlugin(ScrollTrigger)
 const features = [
   {
     icon: <Wallet className="w-6 h-6 text-emerald-400" />,
-    title: "Precision Tracking",
-    desc: "Track every cent efficiently. Support for RM decimals and custom categories tailored for Malaysian lifestyles.",
-    stats: "RM 1,240.50"
+    title: "Natural Language Engine",
+    desc: "Just type 'RM12 grab today'. Our deterministic parser extracts amount, category, merchant, and date instantly.",
+    stats: "Thinking..."
   },
   {
     icon: <PieChart className="w-6 h-6 text-cyan-400" />,
-    title: "Smart Budgets",
-    desc: "Set monthly limits for Food, Transport, and more. We'll warn you when you're burning through cash too fast.",
+    title: "Liquid Budgets",
+    desc: "Set monthly limits for Food, Transport, and more. We'll warn you with gentle nudges when you're burning cash too fast.",
     stats: "82% Used"
   },
   {
     icon: <TrendingUp className="w-6 h-6 text-violet-400" />,
-    title: "Monthly Insights",
-    desc: "Visualize your spending patterns. Spot anomalies and find out exactly where your money is going.",
+    title: "Cinematic Analytics",
+    desc: "Visualize your spending patterns with fluid charts. Spot anomalies and find out exactly where your Ringgit is going.",
     stats: "+12% vs last mo"
   },
   {
-    icon: <Download className="w-6 h-6 text-amber-400" />,
-    title: "Data Control",
-    desc: "Your data is yours. Export everything to CSV whenever you want. No lock-in, ever.",
-    stats: "CSV Ready"
+    icon: <ScanLine className="w-6 h-6 text-amber-400" />,
+    title: "Malaysian Intelligence",
+    desc: "Built for local context. We know what 'Mamak' costs, understand 'semalam', and handle RM formatting natively.",
+    stats: "Local Context"
   }
 ]
 
@@ -62,7 +62,7 @@ export function LandingFeatures() {
   }, [])
 
   return (
-    <section id="features" ref={containerRef} className="-mt-24 py-12 px-4 relative z-10">
+    <section id="features" ref={containerRef} className="mt-20 md:-mt-32 lg:-mt-60 py-12 px-4 relative z-10">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Everything you need.</h2>

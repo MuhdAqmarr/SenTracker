@@ -1,41 +1,60 @@
+import Link from 'next/link'
 import { SocialLoginButtons } from '@/components/auth/social-login-buttons'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Wallet } from 'lucide-react'
+import { LandingBackground } from '@/components/landing/background'
+import { ArrowLeft, Wallet } from 'lucide-react'
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 p-4">
-      <Card className="w-full max-w-md border-slate-200 dark:border-slate-800 shadow-lg">
-        <CardHeader className="space-y-1 text-center">
-          <div className="flex justify-center mb-4">
-            <div className="h-12 w-12 rounded-full bg-emerald-100 dark:bg-emerald-900/20 flex items-center justify-center">
-              <Wallet className="h-6 w-6 text-emerald-600 dark:text-emerald-500" />
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+      <LandingBackground />
+
+      <div className="w-full max-w-md relative z-10">
+        <Link 
+          href="/" 
+          className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-8 text-sm font-medium"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Home
+        </Link>
+
+        <div className="rounded-3xl border border-white/10 bg-black/40 backdrop-blur-xl shadow-2xl p-8 space-y-8">
+          <div className="text-center space-y-2">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500/20 to-cyan-500/20 flex items-center justify-center ring-1 ring-white/10">
+                <Wallet className="w-5 h-5 text-emerald-400" />
+              </div>
+              <span className="font-bold text-xl tracking-tight text-white">
+                SenTracker
+              </span>
             </div>
+            <h1 className="text-2xl font-bold text-white tracking-tight">
+              Get started
+            </h1>
+            <p className="text-zinc-400 text-sm">
+              Sign in or create an account to continue
+            </p>
           </div>
-          <CardTitle className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-            Welcome to SenTracker
-          </CardTitle>
-          <CardDescription className="text-slate-500 dark:text-slate-400">
-            Your personal MYR expense tracker & budget coach
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-6">
+
+          <div className="space-y-6">
             <SocialLoginButtons />
+            
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-slate-200 dark:border-slate-800" />
+                <span className="w-full border-t border-white/10" />
               </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white dark:bg-slate-950 px-2 text-slate-500 dark:text-slate-400">
-                  Secure access via Supabase
+              <div className="relative flex justify-center text-[10px] uppercase tracking-wider font-medium">
+                <span className="bg-[#09090b] px-3 text-zinc-500">
+                  Secured by Supabase
                 </span>
               </div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+        
+        <p className="text-center text-xs text-zinc-500 mt-8">
+          By signing in, you agree to our Terms of Service and Privacy Policy.
+        </p>
+      </div>
     </div>
   )
 }
-
