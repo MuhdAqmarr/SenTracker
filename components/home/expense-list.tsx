@@ -113,7 +113,7 @@ function SwipeableExpenseItem({ expense, onEdit, onDelete }: SwipeableItemProps)
         onDragEnd={handleDragEnd}
         animate={{ x: isOpen ? -100 : 0 }}
         style={{ x }}
-        className="relative flex items-center gap-3 p-3 bg-card rounded-xl border border-border touch-action-pan-y"
+        className="relative z-10 flex items-center gap-3 p-3 bg-card rounded-xl border border-border touch-action-pan-y"
       >
         {/* Category Icon */}
         <div className="h-10 w-10 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0 text-lg">

@@ -5,6 +5,7 @@ import { QuickStats } from '@/components/home/quick-stats'
 import { ExpenseList } from '@/components/home/expense-list'
 import { AddExpenseSheet } from '@/components/expenses/add-expense-sheet'
 import { FadeInStagger, FadeInItem } from '@/components/motion'
+import { DashboardClient } from '@/components/dashboard/dashboard-client'
 
 export const dynamic = 'force-dynamic'
 
@@ -107,8 +108,9 @@ export default async function HomePage({
                 {format(new Date(currentMonth + '-01'), 'MMMM yyyy')}
               </span>
             </div>
-            <ExpenseList 
+            <DashboardClient 
               expenses={expenses}
+              categories={categories}
             />
           </div>
         </FadeInItem>
