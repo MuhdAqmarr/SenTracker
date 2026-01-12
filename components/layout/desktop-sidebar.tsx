@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { Home, BarChart3, Wallet, Target, Settings, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react'
+import { Home, BarChart3, Wallet, Target, Settings, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 
@@ -23,16 +24,23 @@ export function DesktopSidebar() {
     <motion.aside
       initial={false}
       animate={{
-        width: collapsed ? 80 : 256,
+        width: collapsed ? 72 : 200,
       }}
       transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
       className="hidden lg:flex fixed left-0 top-0 bottom-0 bg-card/80 backdrop-blur-xl border-r border-border flex-col z-40"
     >
       {/* Logo */}
-      <div className="h-16 flex items-center px-4 border-b border-border">
-        <div className="flex items-center gap-3 min-w-0">
-          <div className="h-10 w-10 rounded-xl gradient-accent flex items-center justify-center flex-shrink-0 shadow-lg glow-accent">
-            <Sparkles className="h-5 w-5 text-white" />
+      <div className="h-14 flex items-center px-3 border-b border-border">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="h-8 w-8 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden bg-transparent">
+            <Image
+              src="/icon.png"
+              alt="SenTracker"
+              width={32}
+              height={32}
+              className="object-contain rounded-lg"
+              priority
+            />
           </div>
           <AnimatePresence mode="wait">
             {!collapsed && (
@@ -43,7 +51,7 @@ export function DesktopSidebar() {
                 exit={{ opacity: 0, width: 0 }}
                 className="overflow-hidden"
               >
-                <span className="text-lg font-bold gradient-text whitespace-nowrap">
+                <span className="text-base font-bold gradient-text whitespace-nowrap">
                   SenTracker
                 </span>
               </motion.div>
@@ -52,19 +60,19 @@ export function DesktopSidebar() {
         </div>
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="ml-auto p-2 rounded-lg hover:bg-secondary transition-colors touch-target"
+          className="ml-auto p-1.5 rounded-lg hover:bg-secondary transition-colors touch-target"
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           {collapsed ? (
-            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+            <ChevronRight className="h-3.5 w-3.5 text-muted-foreground" />
           ) : (
-            <ChevronLeft className="h-4 w-4 text-muted-foreground" />
+            <ChevronLeft className="h-3.5 w-3.5 text-muted-foreground" />
           )}
         </button>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto" aria-label="Sidebar navigation">
+      <nav className="flex-1 px-2 py-3 space-y-0.5 overflow-y-auto" aria-label="Sidebar navigation">
         {navigation.map((item) => {
           const isActive = pathname === item.href || 
             (item.href !== '/dashboard' && pathname.startsWith(item.href))
@@ -74,7 +82,7 @@ export function DesktopSidebar() {
               key={item.name}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-all relative group",
+                "flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-sm font-medium transition-all relative group",
                 isActive 
                   ? "bg-primary/10 text-primary" 
                   : "text-muted-foreground hover:bg-secondary hover:text-foreground"
@@ -85,13 +93,13 @@ export function DesktopSidebar() {
               {isActive && (
                 <motion.div
                   layoutId="desktopActiveTab"
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 rounded-r-full bg-primary"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-r-full bg-primary"
                   transition={{ type: "spring", stiffness: 500, damping: 35 }}
                 />
               )}
               
               <item.icon className={cn(
-                "h-5 w-5 flex-shrink-0 transition-transform",
+                "h-4 w-4 flex-shrink-0 transition-transform",
                 isActive && "scale-110"
               )} />
               
@@ -127,14 +135,14 @@ export function DesktopSidebar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="p-4 border-t border-border"
+            className="p-3 border-t border-border"
           >
-            <div className="glass-card p-3">
-              <div className="flex items-center gap-2 mb-1">
-                <Target className="h-4 w-4 text-primary" />
+            <div className="glass-card p-2.5">
+              <div className="flex items-center gap-1.5 mb-1">
+                <Target className="h-3.5 w-3.5 text-primary" />
                 <span className="text-xs font-medium text-foreground">Budget Coach</span>
               </div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-muted-foreground leading-tight">
                 Check out your daily insights
               </p>
             </div>

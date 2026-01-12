@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import gsap from "gsap"
 import { ArrowRight } from "lucide-react"
 
@@ -131,67 +132,17 @@ export function LandingHero() {
             {/* Notch */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl z-50" />
             
-            {/* Screen Content */}
-            <div className="w-full h-full bg-zinc-950 flex flex-col p-6 pt-12 space-y-6">
-              
-              {/* Header */}
-              <div className="flex justify-between items-center">
-                <div>
-                  <div className="text-xs text-zinc-400">Total Spent</div>
-                  <div className="text-2xl font-bold text-white">RM 1,234<span className="text-zinc-500 text-sm">.50</span></div>
-                </div>
-                <div className="w-10 h-10 rounded-full bg-zinc-800/50 flex items-center justify-center">
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-emerald-400 to-cyan-400" />
-                </div>
-              </div>
-
-              {/* Chart Mock */}
-              <div className="h-32 w-full bg-zinc-900/50 rounded-2xl flex items-end justify-between p-3 gap-1">
-                {[40, 65, 30, 80, 50, 90, 45].map((h, i) => (
-                  <div 
-                    key={i} 
-                    className="w-full bg-zinc-800 rounded-t-sm" 
-                    style={{ height: `${h}%` }}
-                  >
-                   <div 
-                    className="w-full bg-emerald-500/80 rounded-t-sm" 
-                    style={{ height: i === 5 ? '100%' : '0%' }} 
-                   /> 
-                  </div>
-                ))}
-              </div>
-
-              {/* List */}
-              <div className="space-y-3">
-                <div className="text-xs font-medium text-zinc-500 uppercase">Recent</div>
-                {[
-                  { name: "Tesco Groceries", cat: "Food", price: "- RM 154.20" },
-                  { name: "Petronas", cat: "Transport", price: "- RM 50.00" },
-                  { name: "Netflix", cat: "Entertain", price: "- RM 39.90" },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-zinc-900/50 border border-white/5">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] text-zinc-400">
-                        {item.cat[0]}
-                      </div>
-                      <div className="text-sm text-zinc-200">{item.name}</div>
-                    </div>
-                    <div className="text-sm font-medium text-white">{item.price}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Bottom Nav Mock */}
-              <div className="absolute bottom-6 left-6 right-6 h-14 rounded-full bg-zinc-900/80 backdrop-blur-md border border-white/10 flex items-center justify-around px-4">
-                <div className="w-8 h-1 rounded-full bg-zinc-700" />
-                <div className="w-8 h-1 rounded-full bg-zinc-700" />
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center shadow-lg -mt-6">
-                  <div className="w-4 h-4 bg-white/20 rounded-sm" />
-                </div>
-                <div className="w-8 h-1 rounded-full bg-zinc-700" />
-                <div className="w-8 h-1 rounded-full bg-zinc-700" />
-              </div>
-
+            {/* Screen Content - App Screenshot */}
+            <div className="w-full h-full relative bg-zinc-950 overflow-hidden">
+              <Image
+                src="/phone-mockup.jpeg"
+                alt="SenTracker Mobile App"
+                fill
+                className="object-cover object-top"
+                priority
+                quality={90}
+                sizes="(max-width: 768px) 280px, 320px"
+              />
             </div>
           </div>
         </div>

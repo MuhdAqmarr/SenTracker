@@ -1,7 +1,8 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { SocialLoginButtons } from '@/components/auth/social-login-buttons'
 import { LandingBackground } from '@/components/landing/background'
-import { ArrowLeft, Wallet } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 
 export default function LoginPage() {
   return (
@@ -20,8 +21,15 @@ export default function LoginPage() {
         <div className="rounded-3xl border border-white/10 bg-black/40 backdrop-blur-xl shadow-2xl p-8 space-y-8">
           <div className="text-center space-y-2">
             <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500/20 to-cyan-500/20 flex items-center justify-center ring-1 ring-white/10">
-                <Wallet className="w-5 h-5 text-emerald-400" />
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                <Image
+                  src="/icon.png"
+                  alt="SenTracker"
+                  width={40}
+                  height={40}
+                  className="object-contain rounded-xl"
+                  priority
+                />
               </div>
               <span className="font-bold text-xl tracking-tight text-white">
                 SenTracker

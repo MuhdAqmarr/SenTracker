@@ -22,8 +22,8 @@ export default function ProtectedLayout({
       <DesktopSidebar />
       
       {/* Main Content Area */}
-      <main className="flex-1 pt-safe-header lg:pt-16 lg:ml-[256px] pb-safe-nav lg:pb-0 px-4 lg:px-6 xl:px-8 2xl:px-12 overflow-y-auto overflow-x-hidden">
-        <PageTransition className="w-full max-w-md lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
+      <main className="flex-1 pt-safe-header lg:pt-16 lg:ml-[200px] pb-safe-nav lg:pb-0 px-4 lg:px-6 xl:px-8 2xl:px-12 overflow-y-auto overflow-x-hidden">
+        <PageTransition className="w-full max-w-md lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto">
           {children}
         </PageTransition>
       </main>

@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 import { ArrowRight } from "lucide-react"
@@ -26,10 +27,16 @@ export function LandingNavbar() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         
         {/* Logo */}
-        {/* Logo */}
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-400 to-cyan-400 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-            <span className="font-bold text-black text-xs">ST</span>
+          <div className="w-8 h-8 rounded-xl flex items-center justify-center overflow-hidden">
+            <Image
+              src="/icon.png"
+              alt="SenTracker"
+              width={32}
+              height={32}
+              className="object-contain rounded-xl"
+              priority
+            />
           </div>
           <span className="font-bold text-lg tracking-tight text-white hidden sm:block">
             SenTracker
