@@ -30,14 +30,14 @@ export function DesktopSidebar() {
       className="hidden lg:flex fixed left-0 top-0 bottom-0 bg-card/80 backdrop-blur-xl border-r border-border flex-col z-40"
     >
       {/* Logo */}
-      <div className="h-14 flex items-center px-3 border-b border-border">
-        <div className="flex items-center gap-2.5 min-w-0">
-          <div className="h-8 w-8 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden bg-transparent">
+      <div className="h-14 flex items-center px-2.5 border-b border-border gap-1.5">
+        <div className="flex items-center gap-2 min-w-0 flex-1 overflow-hidden">
+          <div className="h-7 w-7 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden bg-transparent">
             <Image
               src="/icon.png"
               alt="SenTracker"
-              width={32}
-              height={32}
+              width={28}
+              height={28}
               className="object-contain rounded-lg"
               priority
             />
@@ -49,9 +49,9 @@ export function DesktopSidebar() {
                 initial={{ opacity: 0, width: 0 }}
                 animate={{ opacity: 1, width: 'auto' }}
                 exit={{ opacity: 0, width: 0 }}
-                className="overflow-hidden"
+                className="overflow-hidden min-w-0 flex-1"
               >
-                <span className="text-base font-bold gradient-text whitespace-nowrap">
+                <span className="text-sm font-bold gradient-text whitespace-nowrap">
                   SenTracker
                 </span>
               </motion.div>
@@ -60,7 +60,7 @@ export function DesktopSidebar() {
         </div>
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="ml-auto p-1.5 rounded-lg hover:bg-secondary transition-colors touch-target"
+          className="p-1 rounded-lg hover:bg-secondary transition-colors touch-target flex-shrink-0"
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           {collapsed ? (
