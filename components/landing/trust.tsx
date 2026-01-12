@@ -67,7 +67,7 @@ export function LandingFooter() {
                     <button onClick={handleLowMotionToggle} className="hover:text-white transition-colors">
                         Toggle Low Motion
                     </button>
-                    <Link href="#" className="hover:text-white transition-colors">Github</Link>
+                    <Link href="https://github.com/MuhdAqmarr/SenTracker" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Github</Link>
                     <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
                 </div>
             </div>
