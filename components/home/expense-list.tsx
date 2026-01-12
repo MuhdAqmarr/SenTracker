@@ -64,11 +64,11 @@ interface SwipeableItemProps {
 function SwipeableExpenseItem({ expense, onEdit, onDelete }: SwipeableItemProps) {
   const [isOpen, setIsOpen] = useState(false)
   const x = useMotionValue(0)
-  const actionOpacity = useTransform(x, [-100, -50, 0], [1, 0.5, 0])
-  const actionScale = useTransform(x, [-100, -50, 0], [1, 0.9, 0.8])
+  const actionOpacity = useTransform(x, [-140, -70, 0], [1, 0.5, 0])
+  const actionScale = useTransform(x, [-140, -70, 0], [1, 0.9, 0.8])
 
   const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    if (info.offset.x < -50) {
+    if (info.offset.x < -70) {
       setIsOpen(true)
     } else {
       setIsOpen(false)
@@ -108,10 +108,10 @@ function SwipeableExpenseItem({ expense, onEdit, onDelete }: SwipeableItemProps)
       {/* Main content */}
       <motion.div
         drag="x"
-        dragConstraints={{ left: -100, right: 0 }}
+        dragConstraints={{ left: -140, right: 0 }}
         dragElastic={0.1}
         onDragEnd={handleDragEnd}
-        animate={{ x: isOpen ? -100 : 0 }}
+        animate={{ x: isOpen ? -140 : 0 }}
         style={{ x }}
         className="relative z-10 flex items-center gap-3 p-3 bg-card rounded-xl border border-border touch-action-pan-y"
       >
