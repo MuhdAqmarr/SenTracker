@@ -2,6 +2,7 @@
 
 import { Sparkles } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { memo, useMemo } from 'react'
 
 const vibes = [
   "What's your money vibe today? 💫",
@@ -11,10 +12,12 @@ const vibes = [
   "Time for a quick money check 📊",
 ]
 
-export function MoneyVibeHeader() {
-  // Get consistent vibe based on day
-  const today = new Date().getDay()
-  const vibe = vibes[today % vibes.length]
+export const MoneyVibeHeader = memo(function MoneyVibeHeader() {
+  // Get consistent vibe based on day - memoized
+  const vibe = useMemo(() => {
+    const today = new Date().getDay()
+    return vibes[today % vibes.length]
+  }, [])
 
   return (
     <motion.div 
@@ -38,4 +41,4 @@ export function MoneyVibeHeader() {
       </h1>
     </motion.div>
   )
-}
+})

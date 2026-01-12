@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { ExpenseList } from '@/components/home/expense-list'
 import { EditExpenseDialog } from '@/components/expenses/edit-expense-dialog'
 import { deleteExpense } from '@/lib/actions/expenses'
@@ -33,7 +33,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 
-export function DashboardClient({ expenses, categories }: DashboardClientProps) {
+export const DashboardClient = memo(function DashboardClient({ expenses, categories }: DashboardClientProps) {
   const [editingExpense, setEditingExpense] = useState<ExpenseWithCategory | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [deleteId, setDeleteId] = useState<string | null>(null)
@@ -97,4 +97,4 @@ export function DashboardClient({ expenses, categories }: DashboardClientProps) 
       </AlertDialog>
     </>
   )
-}
+})

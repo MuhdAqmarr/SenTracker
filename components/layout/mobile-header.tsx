@@ -32,6 +32,8 @@ export function MobileHeader() {
             height={20}
             className="object-contain"
             priority
+            loading="eager"
+            unoptimized={false}
           />
         </div>
         <h1 className="text-lg font-bold text-slate-900 dark:text-white">

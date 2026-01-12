@@ -37,13 +37,15 @@ async function getCoachData() {
       .gte('date', startDate)
       .lte('date', endDate)
       .eq('user_id', user.id)
-      .order('created_at', { ascending: false }),
+      .order('created_at', { ascending: false })
+      .limit(200), // Limit for performance
     supabase
       .from('expenses')
       .select('*, categories(name)')
       .gte('date', startOfMonth(prevDate).toISOString())
       .lte('date', endOfMonth(prevDate).toISOString())
-      .eq('user_id', user.id),
+      .eq('user_id', user.id)
+      .limit(200), // Limit for performance
     supabase
       .from('budgets')
       .select('*, categories(name)')

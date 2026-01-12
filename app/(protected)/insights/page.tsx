@@ -1,14 +1,34 @@
 import { createClient } from '@/lib/supabase/server'
 import { startOfMonth, endOfMonth, format, eachDayOfInterval, subMonths } from 'date-fns'
 import { FadeInStagger, FadeInItem, ProgressRing } from '@/components/motion'
-import { TrendChart } from '@/components/insights/trend-chart'
-import { BurnRateCard } from '@/components/insights/burn-rate-card'
-import { AnomalyAlerts } from '@/components/insights/anomaly-alerts'
-import { CategoryDonut } from '@/components/insights/category-donut'
-import { TopMerchants } from '@/components/dashboard/top-merchants'
+import nextDynamic from 'next/dynamic'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
+import { Suspense } from 'react'
+
+// Dynamic imports for heavy chart components
+const TrendChart = nextDynamic(() => import('@/components/insights/trend-chart').then(mod => ({ default: mod.TrendChart })), {
+  loading: () => <div className="glass-card p-5 h-64 animate-pulse" />,
+  ssr: false,
+})
+
+const CategoryDonut = nextDynamic(() => import('@/components/insights/category-donut').then(mod => ({ default: mod.CategoryDonut })), {
+  loading: () => <div className="glass-card p-5 h-64 animate-pulse" />,
+  ssr: false,
+})
+
+const BurnRateCard = nextDynamic(() => import('@/components/insights/burn-rate-card').then(mod => ({ default: mod.BurnRateCard })), {
+  loading: () => <div className="glass-card p-5 h-32 animate-pulse" />,
+})
+
+const AnomalyAlerts = nextDynamic(() => import('@/components/insights/anomaly-alerts').then(mod => ({ default: mod.AnomalyAlerts })), {
+  loading: () => <div className="glass-card p-5 h-24 animate-pulse" />,
+})
+
+const TopMerchants = nextDynamic(() => import('@/components/dashboard/top-merchants').then(mod => ({ default: mod.TopMerchants })), {
+  loading: () => <div className="glass-card p-5 h-32 animate-pulse" />,
+})
 
 // Removed force-dynamic for better caching performance
 // export const dynamic = 'force-dynamic'
@@ -213,35 +233,45 @@ export default async function InsightsPage({
 
         {/* Trend Chart */}
         <FadeInItem>
-          <TrendChart data={data.dailyTrend} />
+          <Suspense fallback={<div className="glass-card p-5 h-64 animate-pulse" />}>
+            <TrendChart data={data.dailyTrend} />
+          </Suspense>
         </FadeInItem>
 
         {/* Burn Rate */}
         <FadeInItem>
-          <BurnRateCard 
-            currentBurnRate={data.currentBurnRate}
-            targetBurnRate={data.targetBurnRate}
-            daysRemaining={data.daysRemaining}
-            budgetTotal={data.budgetTotal}
-            totalSpend={data.totalSpend}
-          />
+          <Suspense fallback={<div className="glass-card p-5 h-32 animate-pulse" />}>
+            <BurnRateCard 
+              currentBurnRate={data.currentBurnRate}
+              targetBurnRate={data.targetBurnRate}
+              daysRemaining={data.daysRemaining}
+              budgetTotal={data.budgetTotal}
+              totalSpend={data.totalSpend}
+            />
+          </Suspense>
         </FadeInItem>
 
         {/* Anomalies */}
         {data.anomalies.length > 0 && (
           <FadeInItem>
-            <AnomalyAlerts anomalies={data.anomalies} />
+            <Suspense fallback={<div className="glass-card p-5 h-24 animate-pulse" />}>
+              <AnomalyAlerts anomalies={data.anomalies} />
+            </Suspense>
           </FadeInItem>
         )}
 
         {/* Category Breakdown */}
         <FadeInItem>
-          <CategoryDonut data={data.categoryData} total={data.totalSpend} />
+          <Suspense fallback={<div className="glass-card p-5 h-64 animate-pulse" />}>
+            <CategoryDonut data={data.categoryData} total={data.totalSpend} />
+          </Suspense>
         </FadeInItem>
 
         {/* Top Merchants */}
         <FadeInItem>
-          <TopMerchants data={data.topMerchants} />
+          <Suspense fallback={<div className="glass-card p-5 h-32 animate-pulse" />}>
+            <TopMerchants data={data.topMerchants} />
+          </Suspense>
         </FadeInItem>
       </FadeInStagger>
     </div>

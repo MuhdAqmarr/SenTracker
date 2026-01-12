@@ -54,6 +54,8 @@ export function DesktopSidebar() {
               height={28}
               className="object-contain rounded-lg"
               priority
+              loading="eager"
+              unoptimized={false}
             />
           </div>
           <AnimatePresence mode="wait">

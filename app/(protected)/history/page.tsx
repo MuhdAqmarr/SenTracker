@@ -27,7 +27,8 @@ async function getHistoryData(monthStr: string) {
       .gte('date', startDate)
       .lte('date', endDate)
       .eq('user_id', user.id)
-      .order('date', { ascending: false }),
+      .order('date', { ascending: false })
+      .limit(100), // Limit to 100 expenses per month for better performance
     supabase.from('categories').select('*').order('name')
   ])
 

@@ -2,10 +2,10 @@ import { createClient } from '@/lib/supabase/server'
 import { startOfMonth, endOfMonth, format } from 'date-fns'
 import { MoneyVibeHeader } from '@/components/home/money-vibe-header'
 import { QuickStats } from '@/components/home/quick-stats'
-
 import { AddExpenseSheet } from '@/components/expenses/add-expense-sheet'
 import { FadeInStagger, FadeInItem } from '@/components/motion'
 import { DashboardClient } from '@/components/dashboard/dashboard-client'
+import { Suspense } from 'react'
 
 // Removed force-dynamic for better caching performance
 // export const dynamic = 'force-dynamic'
@@ -32,7 +32,8 @@ async function getDashboardData(monthStr: string) {
       .gte('date', startDate)
       .lte('date', endDate)
       .eq('user_id', user.id)
-      .order('date', { ascending: false }),
+      .order('date', { ascending: false })
+      .limit(50), // Limit to 50 most recent expenses for better performance
     supabase
       .from('budgets')
       .select('*, categories(name)')
@@ -111,10 +112,12 @@ export default async function HomePage({
                 {format(new Date(currentMonth + '-01'), 'MMMM yyyy')}
               </span>
             </div>
-            <DashboardClient 
-              expenses={expenses}
-              categories={categories}
-            />
+            <Suspense fallback={<div className="space-y-3"><div className="glass-card p-4 h-20 animate-pulse" /><div className="glass-card p-4 h-20 animate-pulse" /></div>}>
+              <DashboardClient 
+                expenses={expenses}
+                categories={categories}
+              />
+            </Suspense>
           </div>
         </FadeInItem>
       </FadeInStagger>

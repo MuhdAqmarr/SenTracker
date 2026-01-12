@@ -4,6 +4,7 @@ import { TrendingUp, Wallet, ShoppingBag } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useCountUp } from '@/components/motion'
 import { cn } from '@/lib/utils'
+import { memo } from 'react'
 
 interface QuickStatsProps {
   totalSpend: number
@@ -12,7 +13,7 @@ interface QuickStatsProps {
   topCategoryAmount: number
 }
 
-export function QuickStats({ totalSpend, budgetTotal, topCategory, topCategoryAmount }: QuickStatsProps) {
+export const QuickStats = memo(function QuickStats({ totalSpend, budgetTotal, topCategory, topCategoryAmount }: QuickStatsProps) {
   const animatedSpend = useCountUp(totalSpend, 0.8)
   const remaining = budgetTotal - totalSpend
   const animatedRemaining = useCountUp(Math.abs(remaining), 0.8)
@@ -100,4 +101,4 @@ export function QuickStats({ totalSpend, budgetTotal, topCategory, topCategoryAm
       </motion.div>
     </div>
   )
-}
+})
