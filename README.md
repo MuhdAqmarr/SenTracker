@@ -6,6 +6,25 @@ Now featuring **Natural Language Entry** — just type what you spent, and we'll
 
 ![SenTracker Hero Details](/public/icon-512x512.png)
 
+## 🔒 Security Status
+
+**Row Level Security (RLS) is enabled and verified** ✅
+
+User data isolation is enforced at the database level. All tables have RLS enabled with proper policies:
+
+| Table | RLS Enabled | Policies |
+|-------|------------|----------|
+| **budgets** | ✅ true | 4 policies |
+| **categories** | ✅ true | 2 policies |
+| **expenses** | ✅ true | 4 policies |
+| **profiles** | ✅ true | 3 policies |
+
+**Security Guarantees:**
+- ✅ Users can only access their own data
+- ✅ Database-level enforcement prevents data leakage
+- ✅ All CRUD operations are protected by RLS policies
+- ✅ Categories are read-only (public reference data)
+
 ---
 
 ## ✨ Flagship Features
