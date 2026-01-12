@@ -64,20 +64,33 @@ _Powered by a custom deterministic parsing engine with Malaysian context awarene
 ```bash
 c:/Dev/BountyKD/SenTracker/
 ├── app/                  # Next.js App Router pages
-│   ├── (auth)/          # Authentication routes (login/register)
-│   ├── (protected)/     # App routes (dashboard, expenses, etc.)
-│   └── layout.tsx       # Root layout with providers
+│   ├── (auth)/          # Authentication (login/register)
+│   ├── (protected)/     # Protected app routes (dashboard, insights, etc.)
+│   ├── auth/            # Auth callbacks (Supabase)
+│   ├── fonts/           # Local fonts (Geist)
+│   ├── globals.css      # Global styles & Tailwind
+│   ├── layout.tsx       # Root layout
+│   └── page.tsx         # Landing page
 ├── components/           # React components
-│   ├── expenses/        # Expense-specific components (NL entry, list)
-│   ├── landing/         # Marketing page components
-│   └── ui/              # shadcn/ui reusable primitives
+│   ├── auth/            # Auth buttons & forms
+│   ├── budget/          # Budgeting features
+│   ├── coach/           # Financial coach logic
+│   ├── dashboard/       # Dashboard widgets
+│   ├── expenses/        # Expense list & Natural Language Entry
+│   ├── landing/         # Marketing page sections (Hero, Features)
+│   ├── layout/          # Navigation (BottomNav, Sidebar)
+│   ├── motion/          # Animation wrappers (PageTransition)
+│   ├── settings/        # User settings & preferences
+│   ├── ui/              # shadcn/ui primitives (Buttons, Cards, etc.)
+│   └── ...              # Other feature buckets (insights, sync, etc.)
 ├── lib/                  # Utilities and Logic
-│   ├── actions/         # Server Actions (database mutations)
-│   ├── nl/              # Natural Language Parsing Engine 🧠
+│   ├── actions/         # Server Actions (DB mutations)
+│   ├── nl/              # Natural Language Engine 🧠
 │   │   ├── parser.ts    # Main parsing logic
 │   │   ├── date.ts      # Date extraction (today, semalam)
 │   │   └── keywords.ts  # Category mapping (food, mamak, grab)
-│   └── supabase/        # Database clients
+│   ├── supabase/        # Database clients (Client/Server/Middleware)
+│   └── utils.ts         # Helper functions
 └── __tests__/           # Unit tests (Jest)
 ```
 
