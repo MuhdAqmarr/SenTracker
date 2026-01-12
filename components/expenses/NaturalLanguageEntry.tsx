@@ -32,7 +32,7 @@ const EXAMPLE_PHRASES = [
   'rm 12 grab today',
   'RM8 kopi at Zus',
   'yesterday rm25 petrol shell',
-  'Paid RM120 shopee headphones',
+  'Paid RM120 online shopping headphones',
   'rm 5.50 teh ais mamak',
 ]
 

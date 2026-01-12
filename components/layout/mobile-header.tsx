@@ -13,7 +13,7 @@ export function MobileHeader() {
   // Get title based on path
   const getTitle = () => {
     switch(pathname) {
-      case '/dashboard': return 'Overview'
+      case '/dashboard': return 'Dashboard'
       case '/history': return 'History'
       case '/budget': return 'Budget'
       case '/profile': return 'Profile'

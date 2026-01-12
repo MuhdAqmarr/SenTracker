@@ -7,9 +7,9 @@ import { Home, BarChart3, Wallet, Target, Settings } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const navigation = [
-  { name: 'Home', href: '/dashboard', icon: Home },
+  { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Insights', href: '/insights', icon: BarChart3 },
-  { name: 'Budgets', href: '/budget', icon: Wallet },
+  { name: 'Budget', href: '/budget', icon: Wallet },
   { name: 'Coach', href: '/coach', icon: Target },
   { name: 'Settings', href: '/settings', icon: Settings },
 ]
