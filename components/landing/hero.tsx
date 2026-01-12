@@ -3,57 +3,46 @@
 import { useEffect, useRef } from "react"
 import Link from "next/link"
 import gsap from "gsap"
-import { ArrowRight, ShieldCheck, Zap, Download } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 export function LandingHero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const phoneRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // Check for reduced motion preference
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    
-    // Check locally stored preference from footer
-    const storedPref = localStorage.getItem("sen-low-motion")
-
-    if (mediaQuery.matches || storedPref === "true") return
-
-    // GSAP Intro Timeline
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } })
 
-      tl.from(".hero-text-reveal", {
-        y: 100,
-        opacity: 0,
-        duration: 1.2,
-        stagger: 0.1,
-        skewY: 2
-      })
-      .from(".hero-btn", {
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1
-      }, "-=0.8")
-      .from(".hero-badge", {
-        opacity: 0,
-        y: 10,
-        duration: 0.8,
-        stagger: 0.1
-      }, "-=0.6")
+      // Animate Elements - using fromTo for strictly defined start/end states (prevents stuck visibility)
+      tl.fromTo("h1.hero-title", 
+        { y: 100, autoAlpha: 0, skewY: 2 },
+        { y: 0, autoAlpha: 1, skewY: 0, duration: 1.2 }
+      )
+      .fromTo("p.hero-subtitle",
+        { y: 30, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.8 },
+        "-=0.8"
+      )
+      .fromTo(".hero-btn",
+        { y: 20, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.1 },
+        "-=0.6"
+      )
+      .fromTo(".hero-badge",
+        { y: 10, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.8 },
+        "-=0.8"
+      )
 
       // Phone Entrance
-      gsap.from(phoneRef.current, {
-        y: 100,
-        opacity: 0,
-        duration: 1.5,
-        rotateX: 20,
-        scale: 0.9,
-        ease: "power2.out"
-      })
+      gsap.fromTo(phoneRef.current,
+        { y: 100, autoAlpha: 0, rotateX: 20, scale: 0.9 },
+        { y: 0, autoAlpha: 1, rotateX: 0, scale: 1, duration: 1.5, ease: "power2.out" }
+      )
 
-      // Mouse Parallax Effect
+      // Mouse Parallax
       const handleMouseMove = (e: MouseEvent) => {
+        if (!phoneRef.current) return
         const { clientX, clientY } = e
         const xPos = (clientX / window.innerWidth - 0.5) * 20
         const yPos = (clientY / window.innerHeight - 0.5) * 20
@@ -69,77 +58,66 @@ export function LandingHero() {
       }
 
       window.addEventListener("mousemove", handleMouseMove)
-
-      return () => {
-        window.removeEventListener("mousemove", handleMouseMove)
-      }
+      return () => window.removeEventListener("mousemove", handleMouseMove)
     }, containerRef)
 
     return () => ctx.revert()
   }, [])
 
-  const scrollToFeatures = () => {
-    const features = document.getElementById("features")
-    features?.scrollIntoView({ behavior: "smooth" })
-  }
+
 
   return (
-    <section ref={containerRef} className="relative min-h-[110vh] flex flex-col items-center pt-32 pb-20 px-4 overflow-hidden perspective-1000">
+    <section ref={containerRef} className="relative min-h-screen flex flex-col items-center pt-32 pb-0 px-4 overflow-hidden perspective-1000">
       
       {/* Content Container */}
       <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center z-10">
         
-        {/* Text Side */}
-        <div className="text-center lg:text-left space-y-8">
-          <div className="overflow-hidden">
-            <h1 className="hero-text-reveal text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1]">
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-400">
-                Track Spending.
+        {/* Text Side - Awwwards Style */}
+        <div className="text-center lg:text-left space-y-8 relative z-20">
+          
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/5 bg-white/5 backdrop-blur-md text-[10px] uppercase tracking-widest text-emerald-400 font-semibold mb-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            V2.0 is Live
+          </div>
+
+          <div className="relative">
+            <h1 className="hero-title text-7xl sm:text-8xl lg:text-9xl font-bold tracking-tighter text-white leading-[0.9] invisible">
+              <span className="block opacity-50 relative z-0">LIQUID</span>
+              <span className="block text-emerald-400 relative z-10 -mt-2 sm:-mt-4">
+                FINANCE
               </span>
-              <span className="block">Stay on Budget.</span>
-              <span className="block text-zinc-400">Feel in Control.</span>
             </h1>
+            {/* Decorative background blur for text */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-emerald-500/10 blur-[100px] -z-10 rounded-full" />
           </div>
           
-          <div className="overflow-hidden">
-            <p className="hero-text-reveal text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              A MYR-first expense tracker with tailored budgets and a friendly coach. 
-              Built for real life in Malaysia.
-            </p>
-          </div>
+          <p className="hero-subtitle text-xl text-zinc-400 max-w-lg mx-auto lg:mx-0 leading-relaxed font-light invisible">
+            Stop tracking expenses like it&apos;s 2010. Experience the <span className="text-white font-medium">first cinematic personal finance app</span> built for the Malaysian ecosystem.
+          </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+          <div className="flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start pt-4">
             <Link 
               href="/login" 
-              className="hero-btn group relative inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-semibold text-lg transition-transform hover:scale-105 active:scale-95"
+              className="hero-btn group relative h-14 pl-8 pr-2 bg-white text-black rounded-full font-bold text-lg flex items-center gap-4 hover:bg-zinc-100 transition-all overflow-hidden"
             >
-              Start Tracking Free
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              <div className="absolute inset-0 rounded-full bg-white blur-lg opacity-20 group-hover:opacity-40 transition-opacity" />
+              <span className="relative z-10">Start the Experience</span>
+              <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center group-hover:scale-110 transition-transform">
+                <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+              </div>
             </Link>
-            
-            <button 
-              onClick={scrollToFeatures}
-              className="hero-btn px-8 py-4 text-zinc-400 hover:text-white transition-colors font-medium border border-transparent hover:border-white/10 rounded-full"
-            >
-              See how it works
-            </button>
           </div>
 
-          {/* Badges */}
-          <div className="flex flex-wrap justify-center lg:justify-start gap-6 pt-4 text-xs font-medium text-zinc-500 uppercase tracking-widest">
-            <div className="hero-badge flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-emerald-500" />
-              Private by Design
-            </div>
-            <div className="hero-badge flex items-center gap-2">
-              <Zap className="w-4 h-4 text-amber-500" />
-              Offline-Friendly
-            </div>
-            <div className="hero-badge flex items-center gap-2">
-              <Download className="w-4 h-4 text-blue-500" />
-              Installable PWA
-            </div>
+          <div className="hero-badge pt-8 flex items-center gap-8 justify-center lg:justify-start opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+             {/* Trust Badges / Social Proof */}
+             <div className="text-xs font-mono text-zinc-500 flex flex-col gap-1 text-left">
+                <span className="block text-white font-bold text-lg">4.9/5</span>
+                <span>User Rating</span>
+             </div>
+             <div className="w-px h-8 bg-white/10" />
+             <div className="text-xs font-mono text-zinc-500 flex flex-col gap-1 text-left">
+                <span className="block text-white font-bold text-lg">10k+</span>
+                <span>Transactions</span>
+             </div>
           </div>
         </div>
 

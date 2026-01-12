@@ -36,7 +36,7 @@ export function LandingCoach() {
   }, [])
 
   return (
-    <section ref={containerRef} className="py-24 px-4 relative overflow-hidden">
+    <section id="how-it-works" ref={containerRef} className="py-24 px-4 relative overflow-hidden">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         
         {/* Text */}

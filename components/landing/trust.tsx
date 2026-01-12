@@ -5,7 +5,7 @@ import { Lock, Github, Heart } from "lucide-react"
 
 export function LandingTrust() {
   return (
-    <section className="py-24 px-4 text-center">
+    <section id="privacy" className="py-24 px-4 text-center">
       <div className="max-w-4xl mx-auto space-y-12">
         <h2 className="text-2xl md:text-3xl font-bold text-white">Private by Design.</h2>
         

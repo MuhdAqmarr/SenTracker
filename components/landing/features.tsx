@@ -62,7 +62,7 @@ export function LandingFeatures() {
   }, [])
 
   return (
-    <section id="features" ref={containerRef} className="py-24 px-4 relative z-10">
+    <section id="features" ref={containerRef} className="-mt-24 py-12 px-4 relative z-10">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Everything you need.</h2>

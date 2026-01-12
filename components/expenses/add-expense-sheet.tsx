@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
-import { Calendar as CalendarIcon, Loader2 } from 'lucide-react'
+import { Calendar as CalendarIcon, Loader2, Sparkles, PenLine } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -44,6 +44,9 @@ import { useToast } from '@/hooks/use-toast'
 import { FAB } from '@/components/ui/fab'
 import { useMediaQuery } from '@/hooks/use-media-query'
 import { Plus } from 'lucide-react'
+import { NaturalLanguageEntry } from './NaturalLanguageEntry'
+
+type EntryMode = 'manual' | 'natural'
 
 interface Category {
   id: string
@@ -57,6 +60,7 @@ interface AddExpenseSheetProps {
 
 export function AddExpenseSheet({ categories, variant }: AddExpenseSheetProps) {
   const [open, setOpen] = useState(false)
+  const [entryMode, setEntryMode] = useState<EntryMode>('natural') // Default to NL mode
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
   const isDesktop = useMediaQuery("(min-width: 768px)")
@@ -248,16 +252,56 @@ export function AddExpenseSheet({ categories, variant }: AddExpenseSheetProps) {
     <FAB onClick={() => setOpen(true)} />
   )
 
+  // Tab Toggle UI Component
+  // Tab Toggle UI Component
+  const TabToggle = (
+    <div className="flex gap-1 p-1 bg-zinc-100 dark:bg-zinc-900/50 rounded-lg mb-4 mx-4 border border-zinc-200 dark:border-zinc-800">
+      <button
+        type="button"
+        onClick={() => setEntryMode('natural')}
+        className={cn(
+          'flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all',
+          entryMode === 'natural'
+            ? 'bg-white dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 shadow-sm dark:shadow-none'
+            : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50'
+        )}
+      >
+        <Sparkles className="w-4 h-4" />
+        Natural
+      </button>
+      <button
+        type="button"
+        onClick={() => setEntryMode('manual')}
+        className={cn(
+          'flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all',
+          entryMode === 'manual'
+            ? 'bg-white dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 shadow-sm dark:shadow-none'
+            : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50'
+        )}
+      >
+        <PenLine className="w-4 h-4" />
+        Manual
+      </button>
+    </div>
+  )
+
   if (isDesktop) {
     return (
       <>
         {TriggerButton}
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetContent side="right" className="sm:max-w-[425px]">
-            <SheetHeader className="mb-6">
+          <SheetContent side="right" className="sm:max-w-[425px] overflow-y-auto">
+            <SheetHeader className="mb-4">
               <SheetTitle>Add Expense</SheetTitle>
             </SheetHeader>
-            {ExpenseFormContent}
+            {TabToggle}
+            {entryMode === 'natural' ? (
+              <div className="px-4 pb-8">
+                <NaturalLanguageEntry categories={categories} onClose={() => setOpen(false)} />
+              </div>
+            ) : (
+              ExpenseFormContent
+            )}
           </SheetContent>
         </Sheet>
       </>
@@ -272,7 +316,14 @@ export function AddExpenseSheet({ categories, variant }: AddExpenseSheetProps) {
           <DrawerHeader className="text-left">
             <DrawerTitle>Add Expense</DrawerTitle>
           </DrawerHeader>
-          {ExpenseFormContent}
+          {TabToggle}
+          {entryMode === 'natural' ? (
+            <div className="px-4 pb-8">
+              <NaturalLanguageEntry categories={categories} onClose={() => setOpen(false)} />
+            </div>
+          ) : (
+            ExpenseFormContent
+          )}
         </DrawerContent>
       </Drawer>
     </>

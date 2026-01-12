@@ -1,43 +1,92 @@
 # SenTracker - Premium MYR Finance Companion 💎
 
-A high-end, consumer-grade expense tracker tailored for Malaysians. Built with a focus on "Liquid Finance" aesthetics, privacy-first architecture, and seamless PWA performance.
+A high-end, consumer-grade expense tracker tailored for Malaysians. Built with a focus on **"Liquid Finance"** aesthetics, **privacy-first** architecture, and seamless **PWA** performance.
 
-![SenTracker Hero Details](/app/icon.png)
+Now featuring **Natural Language Entry** — just type what you spent, and we'll handle the rest.
 
-## ✨ Premium Features
+![SenTracker Hero Details](/public/icon.png)
+
+---
+
+## ✨ Flagship Features
+
+### 🪄 Natural Language Entry (New!)
+
+Skip the boring forms. Just type naturally, and our deterministic parser extracts the details instantly.
+
+- **Input**: _"RM12 grab today"_
+- **Output**: `RM12.00` • `Transport` • `Grab` • `Today`
+- **Input**: _"Spent 15 myr on nasi lemak at ali mamak"_
+- **Output**: `RM15.00` • `Food` • `Ali Mamak` • `Today`
+
+_Powered by a custom deterministic parsing engine with Malaysian context awareness._
 
 ### 🎨 Awwwards-Level UX
 
-- **Liquid Gradient Engine**: A custom GPU-accelerated background that creates a calm, floating aurora effect.
-- **Glassmorphism 2.0**: Multi-layered blur effects with dynamic lighting and noise textures.
-- **Cinematic Motion**: Powered by **GSAP** and **Framer Motion** for silky smooth page transitions and scroll triggers.
-- **Interactive 3D Elements**: CSS-based 3D transformations for cards and phone mockups (0kb asset weight!).
+- **Liquid Gradient Engine**: Custom GPU-accelerated backgrounds creating a floating aurora effect.
+- **Glassmorphism 2.0**: Multi-layered blur, dynamic lighting, and noise textures.
+- **Cinematic Motion**: **GSAP** & **Framer Motion** for silky smooth transitions.
+- **Responsive Design**: Mobile-first architecture with native-like PWA gestures.
+
+### 💰 Smart Finance
+
+- **Money Vibe**: Instant visual indicator of your spending health.
+- **Budget Coach**: Rule-based mentoring based on your spending patterns.
+- **Monthly Insights**: Visual breakdowns of where your Ringgit goes.
 
 ### 📱 Progressive Web App (PWA)
 
-- **Installable**: Adds to home screen on iOS and Android.
-- **Offline Capable**: Check your budget even without data.
-- **Haptic Feedback**: Subtle vibrations for tactile interactions (mobile only).
-- **Adaptive Theming**: intelligently switches between a crisp "Daylight" mode and a deep "Midnight" OLED mode.
-
-### 💰 Finance Features (MYR Optimized)
-
-- **Smart Dashboard**: "Money Vibe" indicator that tells you if you're safe to spend.
-- **Budget Coach**: A rule-based financial mentor that gives actionable advice based on your spending patterns.
-- **Monthly Insights**: Visual breakdown of where your Ringgit is going.
-- **Quick-Add**: Optimized mobile flow to add expenses in under 3 seconds.
+- **Installable**: Native-like experience on iOS/Android.
+- **Offline Capable**: View data without internet.
+- **Adaptive Theming**: Seamless Day/Midnight modes.
 
 ---
 
 ## 🛠️ Tech Stack
 
+**Core**
+
 - **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
 - **Language**: TypeScript
 - **Database**: [Supabase](https://supabase.com/) (PostgreSQL + Auth)
-- **Styling**: Tailwind CSS + Custom Design System
-- **Animation**: GSAP + Framer Motion
+- **State**: Server Actions + React Hooks
+
+**UI & Styling**
+
+- **Styling**: Tailwind CSS
+- **Components**: [shadcn/ui](https://ui.shadcn.com/) (Radix Primitives)
+- **Motion**: Framer Motion + GSAP
 - **Icons**: Lucide React
-- **Hosting**: Vercel (Recommended)
+
+**Features**
+
+- **Validation**: Zod + React Hook Form
+- **Date Handling**: date-fns (Malaysian Formats)
+- **PWA**: next-pwa
+
+---
+
+## 📂 Project Structure
+
+```bash
+c:/Dev/BountyKD/SenTracker/
+├── app/                  # Next.js App Router pages
+│   ├── (auth)/          # Authentication routes (login/register)
+│   ├── (protected)/     # App routes (dashboard, expenses, etc.)
+│   └── layout.tsx       # Root layout with providers
+├── components/           # React components
+│   ├── expenses/        # Expense-specific components (NL entry, list)
+│   ├── landing/         # Marketing page components
+│   └── ui/              # shadcn/ui reusable primitives
+├── lib/                  # Utilities and Logic
+│   ├── actions/         # Server Actions (database mutations)
+│   ├── nl/              # Natural Language Parsing Engine 🧠
+│   │   ├── parser.ts    # Main parsing logic
+│   │   ├── date.ts      # Date extraction (today, semalam)
+│   │   └── keywords.ts  # Category mapping (food, mamak, grab)
+│   └── supabase/        # Database clients
+└── __tests__/           # Unit tests (Jest)
+```
 
 ---
 
@@ -53,7 +102,7 @@ npm install
 
 ### 2. Environment Setup
 
-Create a `.env.local` file in the root:
+Create a `.env.local` file:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
@@ -66,24 +115,25 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The landing page demonstrates the full premium experience.
+Visit [http://localhost:3000](http://localhost:3000).
 
----
+### 4. Run Tests
 
-## 🌐 Deployment (Vercel)
+Verify the Natural Language parser logic:
 
-1. **Import** the repository to Vercel.
-2. **Add Environment Variables** (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`).
-3. **Deploy**!
-4. **Important**: Go to Supabase > Authentication > URL Configuration and set your Site URL to your new Vercel domain (e.g., `https://sentracker.vercel.app`).
+```bash
+npm test
+```
 
 ---
 
 ## 🇲🇾 Malaysian Context
 
-- **Currency**: All figures formatted in **RM**.
-- **Date**: DD/MM/YYYY format.
-- **Lifestyle Categories**: Includes tailored categories like 'Mamak', 'Grab', etc.
+- **Currency**: Figures formatted in **RM** (Ringgit Malaysia).
+- **Date Formats**: Supports `DD/MM` (e.g., 12/01) and `D MMM` (e.g., 12 Jan).
+- **Local Lingo**: Understands "semalam" (yesterday), "mamak", "teh ais", etc.
+
+---
 
 ## 📄 License
 
