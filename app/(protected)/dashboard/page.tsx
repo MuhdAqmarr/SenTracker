@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { startOfMonth, endOfMonth, format } from 'date-fns'
 import { MoneyVibeHeader } from '@/components/home/money-vibe-header'
 import { QuickStats } from '@/components/home/quick-stats'
-import { ExpenseList } from '@/components/home/expense-list'
+
 import { AddExpenseSheet } from '@/components/expenses/add-expense-sheet'
 import { FadeInStagger, FadeInItem } from '@/components/motion'
 import { DashboardClient } from '@/components/dashboard/dashboard-client'
