@@ -55,7 +55,7 @@ export function BudgetForm({ categories, budgets, monthYear }: BudgetFormProps) 
     const result = await upsertBudget(categoryId, monthYear, value)
     setSaving(null)
 
-    if (result.error) {
+    if (!result.success) {
       toast({
         variant: "destructive",
         title: "Error",

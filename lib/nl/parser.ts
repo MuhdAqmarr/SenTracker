@@ -31,7 +31,18 @@ const MERCHANT_PATTERNS = [
 ];
 
 /**
- * Parse expense text into structured ParsedExpense
+ * Parses natural language expense text into structured data
+ * 
+ * Supports Malaysian context: "RM12 grab today", "semalam rm25 petrol shell"
+ * 
+ * @param input - Raw expense text from user input
+ * @returns ParsedExpense object with extracted amount, merchant, category, and date
+ * 
+ * @example
+ * ```ts
+ * parseExpenseText("RM12 grab today")
+ * // Returns: { amount: 12, merchant: "Grab", category: "Transport", date: today }
+ * ```
  */
 export function parseExpenseText(input: string): ParsedExpense {
   const warnings: string[] = [];

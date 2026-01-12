@@ -47,7 +47,7 @@ export const DashboardClient = memo(function DashboardClient({ expenses, categor
   const handleDelete = async (id: string) => {
     setDeleteId(null) // Close dialog immediately
     const result = await deleteExpense(id)
-    if (result.error) {
+    if (!result.success) {
       toast({
         variant: "destructive",
         title: "Error",

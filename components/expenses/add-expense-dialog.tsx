@@ -58,7 +58,7 @@ export function AddExpenseDialog({ categories }: { categories: Category[] }) {
   async function onSubmit(data: ExpenseFormValues) {
     const result = await addExpense(data)
 
-    if (result?.error) {
+    if (!result.success) {
       toast({
         variant: "destructive",
         title: "Error",

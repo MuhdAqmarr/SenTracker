@@ -74,7 +74,7 @@ export function EditExpenseDialog({ expense, categories, open, onOpenChange }: E
 
     const result = await updateExpense(expense.id, data)
 
-    if (result?.error) {
+    if (!result.success) {
       toast({
         variant: "destructive",
         title: "Error",

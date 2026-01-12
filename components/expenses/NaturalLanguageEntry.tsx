@@ -103,7 +103,7 @@ export function NaturalLanguageEntry({ categories, onClose }: NaturalLanguageEnt
         notes: parsed.notes || '',
       })
 
-      if (result?.error) {
+      if (!result.success) {
         toast({
           variant: 'destructive',
           title: 'Error',

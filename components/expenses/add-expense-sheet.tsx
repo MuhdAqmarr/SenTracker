@@ -119,7 +119,7 @@ export function AddExpenseSheet({ categories, variant }: AddExpenseSheetProps) {
     const result = await addExpense(data)
     setIsSubmitting(false)
 
-    if (result?.error) {
+    if (!result.success) {
       toast({
         variant: "destructive",
         title: "Error",

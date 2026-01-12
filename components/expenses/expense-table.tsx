@@ -61,7 +61,7 @@ export function ExpenseTable({ data, categories }: { data: Expense[], categories
   const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this expense?')) {
       const result = await deleteExpense(id)
-      if (result.error) {
+      if (!result.success) {
         toast({
           variant: "destructive",
           title: "Error",
