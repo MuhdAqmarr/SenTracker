@@ -86,7 +86,7 @@ export function BudgetForm({ categories, budgets, monthYear }: BudgetFormProps) 
         </CardContent>
       </Card>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {categories.map((category) => {
           const existingBudget = budgets.find(b => b.category_id === category.id)
           const currentValue = limits[category.id] || ''

@@ -3,15 +3,16 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { Home, History, Wallet, User, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Home, BarChart3, Wallet, Target, Settings, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 
 const navigation = [
-  { name: 'Overview', href: '/dashboard', icon: Home },
-  { name: 'History', href: '/history', icon: History },
-  { name: 'Budget', href: '/budget', icon: Wallet },
-  { name: 'Profile', href: '/profile', icon: User },
+  { name: 'Home', href: '/dashboard', icon: Home },
+  { name: 'Insights', href: '/insights', icon: BarChart3 },
+  { name: 'Budgets', href: '/budget', icon: Wallet },
+  { name: 'Coach', href: '/coach', icon: Target },
+  { name: 'Settings', href: '/settings', icon: Settings },
 ]
 
 export function DesktopSidebar() {
@@ -24,59 +25,76 @@ export function DesktopSidebar() {
       animate={{
         width: collapsed ? 80 : 256,
       }}
-      className="hidden lg:flex fixed left-0 top-0 bottom-0 bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 flex-col z-40"
+      transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+      className="hidden lg:flex fixed left-0 top-0 bottom-0 bg-card/80 backdrop-blur-xl border-r border-border flex-col z-40"
     >
       {/* Logo */}
-      <div className="h-14 flex items-center px-4 border-b border-slate-200 dark:border-slate-800">
+      <div className="h-16 flex items-center px-4 border-b border-border">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="h-8 w-8 rounded-lg bg-emerald-500 flex items-center justify-center flex-shrink-0">
-            <Wallet className="h-5 w-5 text-white" />
+          <div className="h-10 w-10 rounded-xl gradient-accent flex items-center justify-center flex-shrink-0 shadow-lg glow-accent">
+            <Sparkles className="h-5 w-5 text-white" />
           </div>
           <AnimatePresence mode="wait">
             {!collapsed && (
-              <motion.span
+              <motion.div
                 key="logo-text"
                 initial={{ opacity: 0, width: 0 }}
                 animate={{ opacity: 1, width: 'auto' }}
                 exit={{ opacity: 0, width: 0 }}
-                className="text-lg font-bold text-slate-900 dark:text-white whitespace-nowrap overflow-hidden"
+                className="overflow-hidden"
               >
-                SenTracker
-              </motion.span>
+                <span className="text-lg font-bold gradient-text whitespace-nowrap">
+                  SenTracker
+                </span>
+              </motion.div>
             )}
           </AnimatePresence>
         </div>
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="ml-auto p-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          className="ml-auto p-2 rounded-lg hover:bg-secondary transition-colors touch-target"
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           {collapsed ? (
-            <ChevronRight className="h-4 w-4 text-slate-600 dark:text-slate-400" />
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
           ) : (
-            <ChevronLeft className="h-4 w-4 text-slate-600 dark:text-slate-400" />
+            <ChevronLeft className="h-4 w-4 text-muted-foreground" />
           )}
         </button>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto" aria-label="Sidebar navigation">
         {navigation.map((item) => {
-          const isActive = pathname === item.href
+          const isActive = pathname === item.href || 
+            (item.href !== '/dashboard' && pathname.startsWith(item.href))
           
           return (
             <Link
               key={item.name}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors relative group",
+                "flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-all relative group",
                 isActive 
-                  ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400" 
-                  : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50"
+                  ? "bg-primary/10 text-primary" 
+                  : "text-muted-foreground hover:bg-secondary hover:text-foreground"
               )}
               title={collapsed ? item.name : undefined}
+              aria-current={isActive ? 'page' : undefined}
             >
-              <item.icon className="h-5 w-5 flex-shrink-0" />
+              {isActive && (
+                <motion.div
+                  layoutId="desktopActiveTab"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 rounded-r-full bg-primary"
+                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                />
+              )}
+              
+              <item.icon className={cn(
+                "h-5 w-5 flex-shrink-0 transition-transform",
+                isActive && "scale-110"
+              )} />
+              
               <AnimatePresence mode="wait">
                 {!collapsed && (
                   <motion.span
@@ -93,7 +111,7 @@ export function DesktopSidebar() {
               
               {/* Tooltip for collapsed state */}
               {collapsed && (
-                <div className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                <div className="absolute left-full ml-3 px-3 py-2 bg-popover text-popover-foreground text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-lg border border-border">
                   {item.name}
                 </div>
               )}
@@ -101,7 +119,28 @@ export function DesktopSidebar() {
           )
         })}
       </nav>
+
+      {/* Footer */}
+      <AnimatePresence mode="wait">
+        {!collapsed && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="p-4 border-t border-border"
+          >
+            <div className="glass-card p-3">
+              <div className="flex items-center gap-2 mb-1">
+                <Target className="h-4 w-4 text-primary" />
+                <span className="text-xs font-medium text-foreground">Budget Coach</span>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Check out your daily insights
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.aside>
   )
 }
-

@@ -1,9 +1,8 @@
 import { createClient } from '@/lib/supabase/server'
 import { startOfMonth, endOfMonth, format } from 'date-fns'
-import { StatsCards } from '@/components/dashboard/stats-cards'
-import { CategoryChart } from '@/components/dashboard/category-chart'
-import { TopMerchants } from '@/components/dashboard/top-merchants'
-import { BudgetProgressCard } from '@/components/dashboard/budget-progress'
+import { MoneyVibeHeader } from '@/components/home/money-vibe-header'
+import { QuickStats } from '@/components/home/quick-stats'
+import { ExpenseList } from '@/components/home/expense-list'
 import { AddExpenseSheet } from '@/components/expenses/add-expense-sheet'
 import { FadeInStagger, FadeInItem } from '@/components/motion'
 
@@ -48,7 +47,7 @@ async function getDashboardData(monthStr: string) {
   }
 }
 
-export default async function DashboardPage({
+export default async function HomePage({
   searchParams,
 }: {
   searchParams: { month?: string }
@@ -60,75 +59,58 @@ export default async function DashboardPage({
 
   const { expenses, budgets, categories } = data
 
+  // Calculate stats
   const totalSpend = expenses.reduce((sum, item) => sum + Number(item.amount), 0)
   const budgetTotal = budgets.reduce((sum, item) => sum + Number(item.monthly_limit), 0)
 
+  // Calculate category spend
   const categorySpend = expenses.reduce((acc, item) => {
-    const catName = item.categories?.name || 'Uncategorized'
+    const catName = item.categories?.name || 'Other'
     acc[catName] = (acc[catName] || 0) + Number(item.amount)
     return acc
   }, {} as Record<string, number>)
 
-  const categoryData = Object.entries(categorySpend).map(([name, value]) => ({
-    name,
-    value,
-  }))
-
-  const merchantSpend = expenses.reduce((acc, item) => {
-    acc[item.merchant] = (acc[item.merchant] || 0) + Number(item.amount)
-    return acc
-  }, {} as Record<string, number>)
-
-  const topMerchants = Object.entries(merchantSpend)
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, 5)
-    .map(([merchant, amount]) => ({
-      merchant,
-      amount,
-      percentage: (amount / totalSpend) * 100
-    }))
-
-  const budgetProgress = budgets.map(budget => {
-    const catName = budget.categories?.name || ''
-    const spent = expenses
-      .filter(e => e.category_id === budget.category_id)
-      .reduce((sum, e) => sum + Number(e.amount), 0)
-    
-    return {
-      category: catName,
-      spent,
-      limit: Number(budget.monthly_limit)
-    }
-  }).sort((a, b) => (b.spent / b.limit) - (a.spent / a.limit))
-
-  const overBudgetCount = budgetProgress.filter(b => b.spent > b.limit).length
+  // Get top category
+  const sortedCategories = Object.entries(categorySpend).sort(([, a], [, b]) => b - a)
+  const topCategory = sortedCategories[0]?.[0] || ''
+  const topCategoryAmount = sortedCategories[0]?.[1] || 0
 
   return (
-    <div className="space-y-4 md:space-y-6 lg:space-y-8 pb-20 lg:pb-0">
-      <AddExpenseSheet categories={categories} />
-
+    <div className="space-y-6 pb-24 lg:pb-6">
       <FadeInStagger>
         <FadeInItem>
-          <StatsCards 
-            totalSpend={totalSpend} 
+          <MoneyVibeHeader />
+        </FadeInItem>
+
+        <FadeInItem>
+          <QuickStats 
+            totalSpend={totalSpend}
             budgetTotal={budgetTotal}
-            overBudgetCount={overBudgetCount}
+            topCategory={topCategory}
+            topCategoryAmount={topCategoryAmount}
           />
         </FadeInItem>
 
-        {/* Chart and Budget Progress - Side by side on desktop */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
-          <FadeInItem>
-            <CategoryChart data={categoryData} />
-          </FadeInItem>
-
-          <FadeInItem>
-            <BudgetProgressCard data={budgetProgress} />
-          </FadeInItem>
-        </div>
-
+        {/* Add Expense CTA */}
         <FadeInItem>
-          <TopMerchants data={topMerchants} />
+          <div className="mb-6">
+            <AddExpenseSheet categories={categories} />
+          </div>
+        </FadeInItem>
+
+        {/* Recent Expenses */}
+        <FadeInItem>
+          <div>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-foreground">Recent Expenses</h2>
+              <span className="text-sm text-muted-foreground">
+                {format(new Date(currentMonth + '-01'), 'MMMM yyyy')}
+              </span>
+            </div>
+            <ExpenseList 
+              expenses={expenses}
+            />
+          </div>
         </FadeInItem>
       </FadeInStagger>
     </div>
