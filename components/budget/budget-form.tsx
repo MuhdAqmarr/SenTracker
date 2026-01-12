@@ -76,11 +76,11 @@ export function BudgetForm({ categories, budgets, monthYear }: BudgetFormProps) 
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Total Monthly Budget</CardTitle>
-          <CardDescription>Sum of all category budgets</CardDescription>
+          <CardTitle className="text-base">Total Monthly Budget</CardTitle>
+          <CardDescription className="text-xs">Sum of all category budgets</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="text-3xl font-bold text-emerald-600">
+          <div className="text-2xl font-bold text-emerald-600">
             {formatCurrency(totalBudget)}
           </div>
         </CardContent>

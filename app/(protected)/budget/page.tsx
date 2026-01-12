@@ -69,8 +69,8 @@ export default async function BudgetPage({
     <div className="flex-1 space-y-6 pb-24 lg:pb-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-bold tracking-tight text-foreground">Budget Settings</h2>
-          <p className="text-sm text-muted-foreground">
+          <h2 className="text-lg font-bold tracking-tight text-foreground">Budget Settings</h2>
+          <p className="text-xs text-muted-foreground">
             Set your monthly spending limits for each category
           </p>
         </div>

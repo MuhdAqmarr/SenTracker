@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { Home, BarChart3, Wallet, Target, Settings, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const navigation = [
   { name: 'Home', href: '/dashboard', icon: Home },
@@ -19,12 +19,26 @@ const navigation = [
 export function DesktopSidebar() {
   const pathname = usePathname()
   const [collapsed, setCollapsed] = useState(false)
+  const [sidebarWidth, setSidebarWidth] = useState(200)
+
+  // Set CSS variable for sidebar width so layout can use it
+  useEffect(() => {
+    const updateWidth = () => {
+      const width = collapsed ? 72 : (window.innerWidth >= 2560 ? 240 : 200)
+      setSidebarWidth(width)
+      document.documentElement.style.setProperty('--sidebar-width', `${width}px`)
+    }
+    
+    updateWidth() // Initial set
+    window.addEventListener('resize', updateWidth)
+    return () => window.removeEventListener('resize', updateWidth)
+  }, [collapsed])
 
   return (
     <motion.aside
       initial={false}
       animate={{
-        width: collapsed ? 72 : 200,
+        width: sidebarWidth,
       }}
       transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
       className="hidden lg:flex fixed left-0 top-0 bottom-0 bg-card/80 backdrop-blur-xl border-r border-border flex-col z-40"
@@ -93,7 +107,7 @@ export function DesktopSidebar() {
               {isActive && (
                 <motion.div
                   layoutId="desktopActiveTab"
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-r-full bg-primary"
+                  className="absolute left-0 top-0 bottom-0 w-1 rounded-r-full bg-primary"
                   transition={{ type: "spring", stiffness: 500, damping: 35 }}
                 />
               )}

@@ -38,7 +38,7 @@ export default async function ProfilePage() {
             </AvatarFallback>
           </Avatar>
           <div>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
               {profile?.display_name || 'User'}
             </h2>
             <p className="text-sm text-slate-500">

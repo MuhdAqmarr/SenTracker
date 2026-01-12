@@ -98,7 +98,7 @@ export function BudgetHealthScore({ budgets }: BudgetHealthScoreProps) {
         {/* Health Score Circle */}
         <div className="flex items-center gap-4 mb-4">
           <div className="relative h-20 w-20 flex-shrink-0">
-            <svg className="transform -rotate-90" width="80" height="80">
+            <svg className="transform -rotate-90 w-full h-full" viewBox="0 0 80 80">
               {/* Background circle */}
               <circle
                 cx="40"
@@ -129,15 +129,15 @@ export function BudgetHealthScore({ budgets }: BudgetHealthScoreProps) {
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-2xl font-bold text-foreground">{healthScore}</span>
+              <span className="text-lg font-bold text-foreground leading-none">{healthScore}</span>
             </div>
           </div>
 
           <div className="flex-1">
-            <p className={cn("text-xl font-bold mb-1", status.color)}>
+            <p className={cn("text-lg font-bold mb-1", status.color)}>
               {status.icon} {status.label}
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               Your overall budget performance
             </p>
           </div>

@@ -184,8 +184,8 @@ export default async function CoachPage() {
           <Target className="h-6 w-6 text-white" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-foreground">Budget Coach</h1>
-          <p className="text-sm text-muted-foreground">Your money mentor</p>
+          <h1 className="text-lg font-bold text-foreground">Budget Coach</h1>
+          <p className="text-xs text-muted-foreground">Your money mentor</p>
         </div>
       </div>
 

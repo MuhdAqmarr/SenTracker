@@ -160,7 +160,7 @@ export default async function InsightsPage({
     <div className="space-y-6 pb-24 lg:pb-6">
       {/* Month Selector */}
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-bold text-foreground">
+        <h1 className="text-lg font-bold text-foreground">
           {format(new Date(currentMonth + '-01'), 'MMMM yyyy')}
         </h1>
         <div className="flex items-center gap-1">
@@ -191,7 +191,7 @@ export default async function InsightsPage({
             <div className="flex items-center justify-between mb-4">
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Total Spend</p>
-                <p className="text-3xl font-bold text-foreground">
+                <p className="text-2xl font-bold text-foreground">
                   RM {formatMoney(data.totalSpend)}
                 </p>
                 {data.budgetTotal > 0 && (

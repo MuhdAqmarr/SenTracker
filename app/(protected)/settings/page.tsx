@@ -33,7 +33,7 @@ export default async function SettingsPage() {
 
   return (
     <div className="space-y-6 pb-24 lg:pb-6">
-      <h1 className="text-xl font-bold text-foreground">Settings</h1>
+      <h1 className="text-lg font-bold text-foreground">Settings</h1>
 
       <FadeInStagger className="space-y-6">
         {/* Account */}
