@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { Wallet, PieChart, TrendingUp, Download, ScanLine, MessageCircle } from "lucide-react"
+import { Wallet, PieChart, TrendingUp, Download, ScanLine } from "lucide-react"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -41,10 +41,11 @@ export function LandingFeatures() {
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray(".feature-card")
       
-      cards.forEach((card: any, index) => {
-        gsap.from(card, {
+      cards.forEach((card: unknown, index) => {
+        const el = card as Element
+        gsap.from(el, {
           scrollTrigger: {
-            trigger: card,
+            trigger: el,
             start: "top 85%",
             toggleActions: "play none none reverse"
           },

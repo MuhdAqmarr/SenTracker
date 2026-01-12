@@ -52,8 +52,8 @@ export function LandingCoach() {
             </span>
           </h2>
           <p className="text-zinc-400 text-lg leading-relaxed max-w-md">
-            It's not just about tracking. It's about getting better. 
-            Receive daily tips, streak rewards, and gentle nudges when you're going off track.
+            It&apos;s not just about tracking. It&apos;s about getting better. 
+            Receive daily tips, streak rewards, and gentle nudges when you&apos;re going off track.
           </p>
         </div>
 
@@ -68,7 +68,7 @@ export function LandingCoach() {
               </div>
               <div>
                 <h4 className="text-white font-medium">3-Day Streak! 🔥</h4>
-                <p className="text-sm text-zinc-400 mt-1">You're on fire! Keep logging to earn the Weekender badge.</p>
+                <p className="text-sm text-zinc-400 mt-1">You&apos;re on fire! Keep logging to earn the Weekender badge.</p>
               </div>
              </div>
           </div>
@@ -94,7 +94,7 @@ export function LandingCoach() {
               </div>
               <div>
                 <h4 className="text-white font-medium">Projected: RM 1,950 📉</h4>
-                <p className="text-sm text-zinc-400 mt-1">Great job! At this pace, you'll save RM 450 this month.</p>
+                <p className="text-sm text-zinc-400 mt-1">Great job! At this pace, you&apos;ll save RM 450 this month.</p>
               </div>
              </div>
              <div className="mt-4 pt-4 border-t border-white/5 flex justify-between items-center text-xs">

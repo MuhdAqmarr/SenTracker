@@ -1,24 +1,20 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import Link from "next/link"
 import gsap from "gsap"
-import { ArrowRight, Smartphone, ShieldCheck, Zap, Download } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { ArrowRight, ShieldCheck, Zap, Download } from "lucide-react"
 
 export function LandingHero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const phoneRef = useRef<HTMLDivElement>(null)
-  const [isLowMotion, setIsLowMotion] = useState(false)
 
   useEffect(() => {
     // Check for reduced motion preference
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    setIsLowMotion(mediaQuery.matches)
     
     // Check locally stored preference from footer
     const storedPref = localStorage.getItem("sen-low-motion")
-    if (storedPref === "true") setIsLowMotion(true)
 
     if (mediaQuery.matches || storedPref === "true") return
 

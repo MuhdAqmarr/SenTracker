@@ -50,7 +50,7 @@ export function BudgetHealthScore({ budgets }: BudgetHealthScoreProps) {
   })
 
   // Start with base average
-  let calculatedScore = Math.round(totalScore / totalBudgets)
+  const calculatedScore = Math.round(totalScore / totalBudgets)
 
   // Apply strict penalty: -10 points for every budget exceeded
   // This ensures even one or two failures drag down the score significantly

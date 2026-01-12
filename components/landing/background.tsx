@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect, useRef } from "react"
 
 export function LandingBackground() {
   return (
