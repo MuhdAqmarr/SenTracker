@@ -92,7 +92,7 @@ export function LandingHero() {
           </div>
           
           <p className="hero-subtitle text-lg lg:text-xl text-zinc-400 max-w-lg mx-auto lg:mx-0 leading-relaxed font-light invisible">
-            Forget boring forms. Just say <span className="text-white font-medium">"RM12 Grab to KLCC"</span> and let our engine handle the rest. The first finance app that speaks Malaysian.
+            Forget boring forms. Just say <span className="text-white font-medium">&quot;RM12 Grab to KLCC&quot;</span> and let our engine handle the rest. The first finance app that speaks Malaysian.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start pt-4">

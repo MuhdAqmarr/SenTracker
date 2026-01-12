@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { Wallet, PieChart, TrendingUp, Download, ScanLine } from "lucide-react"
+import { Wallet, PieChart, TrendingUp, ScanLine } from "lucide-react"
 
 gsap.registerPlugin(ScrollTrigger)
 

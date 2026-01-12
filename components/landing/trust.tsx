@@ -29,7 +29,7 @@ export function LandingTrust() {
               <Heart className="w-5 h-5" />
             </div>
             <h3 className="font-semibold text-white">MYR First</h3>
-            <p className="text-sm text-zinc-500">Built for Malaysians. We know the difference between 'Mamak' costs and fine dining.</p>
+            <p className="text-sm text-zinc-500">Built for Malaysians. We know the difference between &apos;Mamak&apos; costs and fine dining.</p>
           </div>
         </div>
 
