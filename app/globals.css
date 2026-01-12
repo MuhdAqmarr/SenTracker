@@ -466,11 +466,15 @@
 }
 
 .pt-safe-header {
-  padding-top: calc(3.5rem + env(safe-area-inset-top, 0px));
+  padding-top: calc(3.5rem + 1rem + env(safe-area-inset-top, 0px));
 }
 
 .pb-safe-nav {
   padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
+}
+
+.top-safe-header {
+  top: calc(3.5rem + 1rem + env(safe-area-inset-top, 0px));
 }
 
 /* ============================================

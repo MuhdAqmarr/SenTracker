@@ -27,19 +27,19 @@ export function QuickStats({ totalSpend, budgetTotal, topCategory, topCategoryAm
   }
 
   return (
-    <div className="grid grid-cols-3 gap-3 mb-6">
+    <div className="grid grid-cols-3 gap-2 md:gap-3 mb-6">
       {/* Month Spend */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="glass-card p-4"
+        className="glass-card p-3 md:p-4"
       >
-        <div className="flex items-center gap-1.5 mb-2">
-          <TrendingUp className="h-3.5 w-3.5 text-muted-foreground" />
+        <div className="flex items-center gap-1.5 mb-1.5 md:mb-2">
+          <TrendingUp className="h-3 w-3 md:h-3.5 md:w-3.5 text-muted-foreground" />
           <span className="text-xs text-muted-foreground font-medium">Spent</span>
         </div>
-        <p className="text-xl md:text-2xl font-bold text-foreground truncate">
+        <p className="text-base md:text-2xl font-bold text-foreground leading-tight break-all">
           RM {formatMoney(animatedSpend)}
         </p>
         <p className="text-xs text-muted-foreground mt-1">
@@ -53,13 +53,13 @@ export function QuickStats({ totalSpend, budgetTotal, topCategory, topCategoryAm
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15 }}
         className={cn(
-          "glass-card p-4",
+          "glass-card p-3 md:p-4",
           isOverBudget && "border-destructive/50 animate-pulse-glow"
         )}
       >
-        <div className="flex items-center gap-1.5 mb-2">
+        <div className="flex items-center gap-1.5 mb-1.5 md:mb-2">
           <Wallet className={cn(
-            "h-3.5 w-3.5",
+            "h-3 w-3 md:h-3.5 md:w-3.5",
             isOverBudget ? "text-destructive" : "text-muted-foreground"
           )} />
           <span className={cn(
@@ -70,7 +70,7 @@ export function QuickStats({ totalSpend, budgetTotal, topCategory, topCategoryAm
           </span>
         </div>
         <p className={cn(
-          "text-xl md:text-2xl font-bold truncate",
+          "text-base md:text-2xl font-bold leading-tight break-all",
           isOverBudget ? "text-destructive" : "text-primary"
         )}>
           RM {formatMoney(animatedRemaining)}
@@ -85,13 +85,13 @@ export function QuickStats({ totalSpend, budgetTotal, topCategory, topCategoryAm
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="glass-card p-4"
+        className="glass-card p-3 md:p-4"
       >
-        <div className="flex items-center gap-1.5 mb-2">
-          <ShoppingBag className="h-3.5 w-3.5 text-muted-foreground" />
+        <div className="flex items-center gap-1.5 mb-1.5 md:mb-2">
+          <ShoppingBag className="h-3 w-3 md:h-3.5 md:w-3.5 text-muted-foreground" />
           <span className="text-xs text-muted-foreground font-medium">Top</span>
         </div>
-        <p className="text-sm md:text-base font-bold text-foreground truncate">
+        <p className="text-xs md:text-base font-bold text-foreground break-words leading-tight">
           {topCategory || 'None'}
         </p>
         <p className="text-xs text-muted-foreground mt-1">

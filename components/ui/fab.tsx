@@ -10,7 +10,11 @@ interface FABProps {
 export function FAB({ onClick }: FABProps) {
   return (
     <motion.div
-      className="fixed bottom-24 right-4 z-40"
+      className="fixed right-4 z-40 lg:bottom-6"
+      style={{
+        // Position above bottom nav (h-16 = 4rem) + bottom-6 (1.5rem) + FAB spacing (1.5rem) + safe area
+        bottom: 'calc(4rem + 1.5rem + 1.5rem + env(safe-area-inset-bottom, 0px))',
+      }}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
