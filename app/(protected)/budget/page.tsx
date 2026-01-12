@@ -4,7 +4,10 @@ import { BudgetForm } from '@/components/budget/budget-form'
 import { MonthSelector } from '@/components/dashboard/month-selector'
 import { BudgetHealthScore } from '@/components/budgets/budget-health-score'
 
-export const dynamic = 'force-dynamic'
+// Removed force-dynamic for better caching performance
+// export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic' // Required for searchParams
+export const revalidate = 60 // Revalidate every 60 seconds
 
 async function getBudgetData(monthYear: string) {
   const supabase = createClient()

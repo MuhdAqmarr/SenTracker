@@ -18,7 +18,7 @@ export function BottomNav() {
   const pathname = usePathname()
 
   return (
-    <div className="fixed bottom-6 left-4 right-4 z-50 lg:hidden pointer-events-none">
+    <div className="fixed bottom-6 left-4 right-4 z-50 lg:hidden pointer-events-none pb-safe">
       <nav 
         className={cn(
           "mx-auto max-w-md rounded-full pointer-events-auto",
@@ -43,6 +43,7 @@ export function BottomNav() {
               <Link
                 key={item.name}
                 href={item.href}
+                prefetch={true}
                 className="relative flex flex-col items-center justify-center flex-1 h-full touch-target group"
                 aria-current={isActive ? 'page' : undefined}
               >

@@ -10,7 +10,10 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
-export const dynamic = 'force-dynamic'
+// Removed force-dynamic for better caching performance
+// export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic' // Required for searchParams
+export const revalidate = 60 // Revalidate every 60 seconds
 
 async function getInsightsData(monthStr: string) {
   const supabase = createClient()

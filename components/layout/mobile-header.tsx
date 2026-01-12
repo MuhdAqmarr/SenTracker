@@ -22,7 +22,7 @@ export function MobileHeader() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800 px-4 h-14 flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800 px-4 min-h-[3.5rem] flex items-center justify-between pt-safe" style={{ height: 'calc(3.5rem + env(safe-area-inset-top, 0px))' }}>
       <div className="flex items-center gap-2">
         <Wallet className="h-5 w-5 text-emerald-500" />
         <h1 className="text-lg font-bold text-slate-900 dark:text-white">

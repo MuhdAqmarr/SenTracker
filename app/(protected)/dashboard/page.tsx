@@ -7,7 +7,10 @@ import { AddExpenseSheet } from '@/components/expenses/add-expense-sheet'
 import { FadeInStagger, FadeInItem } from '@/components/motion'
 import { DashboardClient } from '@/components/dashboard/dashboard-client'
 
-export const dynamic = 'force-dynamic'
+// Removed force-dynamic for better caching performance
+// export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic' // Required for searchParams
+export const revalidate = 60 // Revalidate every 60 seconds
 
 async function getDashboardData(monthStr: string) {
   const supabase = createClient()

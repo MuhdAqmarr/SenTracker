@@ -6,7 +6,9 @@ import { WeeklyFeed } from '@/components/coach/weekly-feed'
 import { Achievements } from '@/components/coach/achievements'
 import { Target } from 'lucide-react'
 
-export const dynamic = 'force-dynamic'
+// Removed force-dynamic for better caching performance
+// export const dynamic = 'force-dynamic'
+export const revalidate = 60 // Revalidate every 60 seconds
 
 interface CoachInsight {
   id: string

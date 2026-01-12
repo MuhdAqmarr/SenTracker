@@ -6,7 +6,10 @@ import { Card, CardContent } from '@/components/ui/card'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { AddExpenseSheet } from '@/components/expenses/add-expense-sheet'
 
-export const dynamic = 'force-dynamic'
+// Removed force-dynamic for better caching performance
+// export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic' // Required for searchParams
+export const revalidate = 60 // Revalidate every 60 seconds
 
 async function getHistoryData(monthStr: string) {
   const supabase = createClient()

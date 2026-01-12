@@ -5,15 +5,51 @@ import { Drawer as DrawerPrimitive } from "vaul"
 
 import { cn } from "@/lib/utils"
 
+type DrawerProps = {
+  keyboardAware?: boolean
+  children?: React.ReactNode
+} & Parameters<typeof DrawerPrimitive.Root>[0]
+
 const Drawer = ({
   shouldScaleBackground = true,
+  keyboardAware = false,
+  children,
   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
-  <DrawerPrimitive.Root
-    shouldScaleBackground={shouldScaleBackground}
-    {...props}
-  />
-)
+}: DrawerProps) => {
+  const [isKeyboardOpen, setIsKeyboardOpen] = React.useState(false)
+
+  React.useEffect(() => {
+    if (!keyboardAware || typeof window === 'undefined' || !window.visualViewport) return
+
+    const handleViewportChange = () => {
+      const viewport = window.visualViewport
+      if (viewport) {
+        const heightDiff = window.innerHeight - viewport.height
+        setIsKeyboardOpen(heightDiff > 150)
+      }
+    }
+
+    window.visualViewport.addEventListener('resize', handleViewportChange)
+    return () => {
+      window.visualViewport?.removeEventListener('resize', handleViewportChange)
+    }
+  }, [keyboardAware])
+
+  // Conditionally set props based on keyboard state
+  const drawerProps = {
+    shouldScaleBackground,
+    dismissible: !isKeyboardOpen,
+    repositionInputs: true,
+    ...(isKeyboardOpen && { fixed: true }),
+    ...props,
+  }
+
+  return (
+    <DrawerPrimitive.Root {...drawerProps}>
+      {children}
+    </DrawerPrimitive.Root>
+  )
+}
 Drawer.displayName = "Drawer"
 
 const DrawerTrigger = DrawerPrimitive.Trigger

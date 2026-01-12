@@ -4,7 +4,9 @@ import { SettingsForm } from '@/components/settings/settings-form'
 import { ExportSection } from '@/components/settings/export-section'
 import { AccountSection } from '@/components/settings/account-section'
 
-export const dynamic = 'force-dynamic'
+// Removed force-dynamic for better caching performance
+// export const dynamic = 'force-dynamic'
+export const revalidate = 300 // Revalidate every 5 minutes (settings change less frequently)
 
 async function getSettingsData() {
   const supabase = createClient()

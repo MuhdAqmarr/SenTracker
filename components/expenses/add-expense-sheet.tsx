@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
@@ -62,12 +62,47 @@ export function AddExpenseSheet({ categories, variant }: AddExpenseSheetProps) {
   const [open, setOpen] = useState(false)
   const [entryMode, setEntryMode] = useState<EntryMode>('natural') // Default to NL mode
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
   const { toast } = useToast()
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const isLargeScreen = useMediaQuery("(min-width: 1024px)")
   
   // Auto-detect variant: button on desktop (lg+), fab on mobile/tablet
   const effectiveVariant = variant || (isLargeScreen ? 'button' : 'fab')
+
+  // Detect keyboard open/close using Visual Viewport API
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.visualViewport) return
+
+    const handleViewportChange = () => {
+      const viewport = window.visualViewport
+      if (viewport) {
+        const heightDiff = window.innerHeight - viewport.height
+        setIsKeyboardOpen(heightDiff > 150) // Threshold for keyboard detection
+      }
+    }
+
+    window.visualViewport.addEventListener('resize', handleViewportChange)
+    return () => {
+      window.visualViewport?.removeEventListener('resize', handleViewportChange)
+    }
+  }, [])
+
+  // Prevent drawer from closing when keyboard is open
+  const handleOpenChange = (newOpen: boolean) => {
+    if (!newOpen && isKeyboardOpen) {
+      // If keyboard is open, blur the active input first
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur()
+      }
+      // Small delay to let keyboard close, then close drawer
+      setTimeout(() => {
+        setOpen(false)
+      }, 200)
+    } else {
+      setOpen(newOpen)
+    }
+  }
 
   const form = useForm<ExpenseFormValues>({
     resolver: zodResolver(expenseSchema),
@@ -311,12 +346,29 @@ export function AddExpenseSheet({ categories, variant }: AddExpenseSheetProps) {
   return (
     <>
       {TriggerButton}
-      <Drawer open={open} onOpenChange={setOpen}>
-        <DrawerContent className="max-h-[85vh] flex flex-col">
-          <DrawerHeader className="text-left flex-shrink-0">
+      <Drawer 
+        open={open} 
+        onOpenChange={handleOpenChange}
+        keyboardAware={true}
+        shouldScaleBackground={true}
+      >
+        <DrawerContent 
+          className={cn(
+            "flex flex-col",
+            isKeyboardOpen 
+              ? "max-h-[calc(100vh-env(safe-area-inset-top)-env(safe-area-inset-bottom))]" 
+              : "max-h-[85vh]"
+          )}
+        >
+          <DrawerHeader className="text-left flex-shrink-0 pb-2">
             <DrawerTitle>Add Expense</DrawerTitle>
           </DrawerHeader>
-          <div className="flex-1 overflow-y-auto px-4 pb-8">
+          <div 
+            className={cn(
+              "flex-1 overflow-y-auto overscroll-contain px-4 pb-8",
+              isKeyboardOpen && "pb-safe"
+            )}
+          >
             {TabToggle}
             {entryMode === 'natural' ? (
               <div className="pb-8">

@@ -2,9 +2,7 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function updateSession(request: NextRequest) {
-  // #region agent log
-  fetch('http://127.0.0.1:7242/ingest/41ffdff1-fbce-4bc2-bd3b-bb934cde6189',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lib/supabase/middleware.ts:6',message:'updateSession entry',data:{url:process.env.NEXT_PUBLIC_SUPABASE_URL?.substring(0,30)},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A,D'})}).catch(()=>{});
-  // #endregion
+  // Debug logging removed for performance - was causing 3-5 second delays
   let supabaseResponse = NextResponse.next({
     request,
   })
@@ -41,15 +39,9 @@ export async function updateSession(request: NextRequest) {
   //    myNewResponse.cookies.setAll(supabaseResponse.cookies.getAll())
   // 3. Change the myNewResponse object to fit your needs, but avoid changing
   //    the cookies!
-  // #region agent log
-  fetch('http://127.0.0.1:7242/ingest/41ffdff1-fbce-4bc2-bd3b-bb934cde6189',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lib/supabase/middleware.ts:40',message:'Before getUser',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'D'})}).catch(()=>{});
-  // #endregion
   const {
     data: { user },
   } = await supabase.auth.getUser()
-  // #region agent log
-  fetch('http://127.0.0.1:7242/ingest/41ffdff1-fbce-4bc2-bd3b-bb934cde6189',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lib/supabase/middleware.ts:48',message:'After getUser',data:{hasUser:!!user,path:request.nextUrl.pathname},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'D,E'})}).catch(()=>{});
-  // #endregion
 
   if (
     !user &&
