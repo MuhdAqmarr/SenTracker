@@ -4,7 +4,7 @@ A high-end, consumer-grade expense tracker tailored for Malaysians. Built with a
 
 Now featuring **Natural Language Entry** — just type what you spent, and we'll handle the rest.
 
-![SenTracker Hero Details](/public/icon.png)
+![SenTracker Hero Details](/public/icon-512x512.png)
 
 ---
 

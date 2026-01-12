@@ -9,8 +9,10 @@ import {
 } from "@/components/ui/select"
 import { format, subMonths } from "date-fns"
 import { useRouter, useSearchParams } from "next/navigation"
+import { Suspense } from "react"
+import { Skeleton } from "@/components/ui/skeleton"
 
-export function MonthSelector() {
+function MonthSelectorInner() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const currentMonth = searchParams.get("month") || format(new Date(), "yyyy-MM")
@@ -46,3 +48,10 @@ export function MonthSelector() {
   )
 }
 
+export function MonthSelector() {
+  return (
+    <Suspense fallback={<Skeleton className="w-[180px] h-10" />}>
+      <MonthSelectorInner />
+    </Suspense>
+  )
+}
